@@ -7,13 +7,13 @@
         "module",
         "documents"
     ],
-    "homepage": "https://github.com/hiqdev/hipanel-module-documents",
+    "homepage": "https://github.com/hiqdev/hipanel-module-document",
     "license": "BSD-3-Clause",
     "support": {
         "email": "support@hiqdev.com",
-        "source": "https://github.com/hiqdev/hipanel-module-documents",
-        "issues": "https://github.com/hiqdev/hipanel-module-documents/issues",
-        "wiki": "https://github.com/hiqdev/hipanel-module-documents/wiki",
+        "source": "https://github.com/hiqdev/hipanel-module-document",
+        "issues": "https://github.com/hiqdev/hipanel-module-document/issues",
+        "wiki": "https://github.com/hiqdev/hipanel-module-document/wiki",
         "forum": "http://forum.hiqdev.com/"
     },
     "authors": [
