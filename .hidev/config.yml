@@ -5,7 +5,7 @@ package:
     headline:       HiPanel Documents Package
     homepage:       https://hipanel.com/
     keywords:       hipanel, control panel, hosting, domains, documents
-    namespace:      hipanel
+    namespace:      hipanel\modules\document
     description: |
         [![Logo](https://raw.githubusercontent.com/hiqdev/hipanel-core/master/docs/logo.png)](https://hipanel.com/)
 
