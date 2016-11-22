@@ -13,6 +13,10 @@
 Thumbs.db
 nbproject
 
+# HiSite directories
+/runtime/*
+/web/assets/*
+
 # vendor dirs
 vendor
 
@@ -31,3 +35,6 @@ composer.phar
 php-cs-fixer.phar
 phpunit-skelgen.phar
 phpunit.phar
+
+# Binaries
+ocular.phar
