@@ -64,5 +64,10 @@
             "type": "composer",
             "url": "https://asset-packagist.org"
         }
-    ]
+    ],
+    "extra": {
+        "config-plugin": {
+            "hisite": "src/config/hisite.php"
+        }
+    }
 }
