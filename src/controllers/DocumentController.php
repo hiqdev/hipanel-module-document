@@ -11,12 +11,37 @@
 
 namespace hipanel\modules\document\controllers;
 
-use yii\web\Controller;
+use hipanel\actions\IndexAction;
+use hipanel\base\CrudController;
 
-class DocumentsController extends Controller
+/**
+ * Class DocumentController
+ * @package hipanel\modules\document\controllers
+ */
+class DocumentController extends CrudController
 {
-    public function actionIndex()
+    public function actions()
     {
-        return $this->render('index', ['model' => new Document()]);
+        return [
+            'index' => [
+                'class' => IndexAction::class,
+                'data' => function () {
+                    return [
+                        'states' => $this->getStateData(),
+                        'types' => $this->getTypeData(),
+                    ];
+                },
+            ]
+        ];
+    }
+
+    public function getStateData()
+    {
+        return $this->getRefs('state,document', 'hipanel:document');
+    }
+
+    public function getTypeData()
+    {
+        return $this->getRefs('type,document', 'hipanel:document');
     }
 }

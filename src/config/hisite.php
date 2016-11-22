@@ -2,7 +2,7 @@
 
 return [
     'aliases' => [
-        '@document' => '/document/',
+        '@document' => '/document/document',
     ],
     'modules' => [
         'document' => [

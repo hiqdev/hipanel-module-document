@@ -1,13 +1,13 @@
 <?php
 
-use hipanel\modules\client\grid\ClientGridView;
+use hipanel\modules\document\grid\DocumentGridView;
 use hipanel\widgets\IndexPage;
 use yii\helpers\Html;
 
 /**
  * @var \yii\data\ActiveDataProvider $dataProvider
- * @var \hipanel\modules\document\Document $model
- * @var \hipanel\modules\document\Document[] $models
+ * @var \hipanel\modules\document\models\Document $model
+ * @var \hipanel\modules\document\models\Document[] $models
  * @var array $types
  * @var array $states
  */
@@ -30,11 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $page->renderLayoutSwitcher() ?>
         <?= $page->renderSorter([
             'attributes' => [
-                'seller',
-                'client',
                 'title',
-                'type',
-                'state',
                 'create_time',
             ],
         ]) ?>
@@ -43,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php $page->beginContent('table') ?>
     <?php $page->beginBulkForm() ?>
-    <?= ClientGridView::widget([
+    <?= DocumentGridView::widget([
         'boxed' => false,
         'dataProvider' => $dataProvider,
         'filterModel'  => $model,

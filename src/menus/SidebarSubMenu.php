@@ -13,6 +13,10 @@ namespace hipanel\modules\document\menus;
 
 use Yii;
 
+/**
+ * Class SidebarSubMenu
+ * @package hipanel\modules\document\menus
+ */
 class SidebarSubMenu extends \hiqdev\menumanager\Menu
 {
     public function items()
