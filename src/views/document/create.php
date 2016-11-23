@@ -1,13 +1,14 @@
 <?php
 
-use hipanel\widgets\Box;
+/**
+ * @var \hipanel\modules\document\models\Document $model
+ * @var array $types
+ */
 
-$this->title = Yii::t('hipanel:client', 'Create client');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('hipanel', 'Client'), 'url' => ['index']];
+$this->title = Yii::t('hipanel', 'Create');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('hipanel:document', 'Documents'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?php Box::begin() ?>
-    <?= $this->render('_form', ['model' => $model]) ?>
-<?php Box::end() ?>
+<?= $this->render('_form', compact('model', 'types', 'states')) ?>

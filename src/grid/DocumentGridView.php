@@ -11,21 +11,12 @@
 
 namespace hipanel\modules\document\grid;
 
+use hipanel\modules\document\widgets\DocumentType;
+use hipanel\modules\document\widgets\DocumentState;
 use hiqdev\menumanager\MenuColumn;
-use hiqdev\menumanager\widgets\MenuButton;
-use hipanel\grid\ActionColumn;
 use hipanel\grid\BoxedGridView;
-use hipanel\grid\MainColumn;
 use hipanel\grid\RefColumn;
-use hipanel\grid\XEditableColumn;
-use hipanel\helpers\Url;
 use hipanel\modules\client\menus\ClientActionsMenu;
-use hipanel\modules\client\models\Client;
-use hipanel\modules\client\widgets\ClientState;
-use hipanel\modules\client\widgets\ClientType;
-use hipanel\modules\finance\grid\BalanceColumn;
-use hipanel\modules\finance\grid\CreditColumn;
-use hipanel\widgets\ArraySpoiler;
 use Yii;
 use yii\helpers\Html;
 
@@ -42,7 +33,11 @@ class DocumentGridView extends BoxedGridView
     {
         return [
             'title' => [
-                'attribute' => 'title',
+                'format' => 'raw',
+                'filterAttribute' => 'title_ilike',
+                'value' => function ($model) {
+                    return Html::a($model->title, ['@document/view', 'id' => $model->id]);
+                }
             ],
             'state' => [
                 'class'  => RefColumn::class,
@@ -51,7 +46,7 @@ class DocumentGridView extends BoxedGridView
                 'gtype'  => 'state,document',
                 'i18nDictionary' => 'hipanel:document',
                 'value'  => function ($model) {
-                    return ClientState::widget(compact('model'));
+                    return DocumentState::widget(['model' => $model]);
                 },
             ],
             'type' => [
@@ -61,13 +56,28 @@ class DocumentGridView extends BoxedGridView
                 'gtype'  => 'type,document',
                 'i18nDictionary' => 'hipanel:document',
                 'value'  => function ($model) {
-                    return ClientType::widget(compact('model'));
+                    return DocumentType::widget(['model' => $model]);
                 },
             ],
             'actions' => [
                 'class' => MenuColumn::class,
                 'menuClass' => ClientActionsMenu::class,
             ],
+            'size' => [
+                'label' => Yii::t('hipanel:document', 'Size'),
+                'value' => function ($model) {
+                    return Yii::$app->formatter->asShortSize($model->file->size, 1);
+                }
+            ],
+            'filename' => [
+                'attribute' => 'file.filename',
+                'label' => Yii::t('hipanel:document', 'Filename'),
+            ],
+            'create_time' => [
+                'attribute' => 'file.create_time',
+                'label' => Yii::t('hipanel:document', 'Create time'),
+                'format' => 'datetime',
+            ]
         ];
     }
 }

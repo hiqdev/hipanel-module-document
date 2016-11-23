@@ -31,6 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $page->renderSorter([
             'attributes' => [
                 'title',
+                'type',
+                'state',
+                'client',
+                'seller',
                 'create_time',
             ],
         ]) ?>

@@ -12,7 +12,13 @@
 namespace hipanel\modules\document\controllers;
 
 use hipanel\actions\IndexAction;
+use hipanel\actions\OrientationAction;
+use hipanel\actions\SmartCreateAction;
+use hipanel\actions\SmartUpdateAction;
+use hipanel\actions\ValidateFormAction;
+use hipanel\actions\ViewAction;
 use hipanel\base\CrudController;
+use yii\filters\AccessControl;
 
 /**
  * Class DocumentController
@@ -20,19 +26,72 @@ use hipanel\base\CrudController;
  */
 class DocumentController extends CrudController
 {
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(), [
+            'manage-access' => [
+                'class' => AccessControl::class,
+                'only' => ['update', 'delete'],
+                'rules' => [
+                    [
+                        'allow'   => true,
+//                        'roles'   => ['manage'],
+                    ],
+                ],
+            ]
+        ]);
+    }
+
     public function actions()
     {
         return [
             'index' => [
                 'class' => IndexAction::class,
-                'data' => function () {
-                    return [
-                        'states' => $this->getStateData(),
-                        'types' => $this->getTypeData(),
-                    ];
-                },
-            ]
+                'data' => $this->getAdditionalDataClosure(),
+                'on beforePerform' => $this->getBeforePerformClosure(),
+            ],
+            'create' => [
+                'class' => SmartCreateAction::class,
+                'data' => $this->getAdditionalDataClosure(),
+            ],
+            'view' => [
+                'class' => ViewAction::class,
+                'data' => $this->getAdditionalDataClosure(),
+                'on beforePerform' => $this->getBeforePerformClosure(),
+            ],
+            'update' => [
+                'class' => SmartUpdateAction::class,
+                'data' => $this->getAdditionalDataClosure(),
+                'on beforePerform' => $this->getBeforePerformClosure(),
+            ],
+            'validate-form' => [
+                'class' => ValidateFormAction::class,
+            ],
+            'set-orientation' => [
+                'class' => OrientationAction::class,
+                'allowedRoutes' => ['@document/index'],
+            ],
         ];
+    }
+
+    private function getAdditionalDataClosure()
+    {
+        return function () {
+            return [
+                'states' => $this->getStateData(),
+                'types' => $this->getTypeData(),
+            ];
+        };
+    }
+
+    private function getBeforePerformClosure()
+    {
+        return function ($event) {
+            /** @var ViewAction $action */
+            $action = $event->sender;
+
+            $action->getDataProvider()->query->joinWith('file');
+        };
     }
 
     public function getStateData()
