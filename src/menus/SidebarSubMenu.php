@@ -22,9 +22,13 @@ class SidebarSubMenu extends \hiqdev\menumanager\Menu
     public function items()
     {
         return [
-            'documents' => [
-                'label' => Yii::t('hipanel:document', 'Documents'),
-                'url' => ['/document/document/index'],
+            'clients' => [
+                'items' => [
+                    'documents' => [
+                        'label' => Yii::t('hipanel:document', 'Documents'),
+                        'url' => ['/document/document/index'],
+                    ],
+                ],
             ],
         ];
     }

@@ -23,18 +23,20 @@ return [
                 'sidebar' => [
                     'add' => [
                         'client' => [
-                            'add' => [
-                                'document' => [
-                                    'menu' => \hipanel\modules\document\menus\SidebarSubMenu::class,
-                                    'where' => [
-                                        'after' => ['contacts'],
+                            'menu' => [
+                                'merge' => [
+                                    'document' => [
+                                        'menu' => \hipanel\modules\document\menus\SidebarSubMenu::class,
+                                        'where' => [
+                                            'after' => ['contacts'],
+                                        ],
                                     ],
-                                ]
+                                ],
                             ],
                         ],
                     ],
                 ],
             ],
         ],
-    ]
+    ],
 ];

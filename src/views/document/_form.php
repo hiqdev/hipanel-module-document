@@ -7,6 +7,7 @@
  */
 
 use hipanel\helpers\Url;
+use hipanel\modules\client\widgets\combo\ClientCombo;
 use hipanel\widgets\Box;
 use hipanel\widgets\FileInput;
 use yii\helpers\Html;
