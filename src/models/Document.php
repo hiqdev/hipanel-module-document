@@ -5,6 +5,7 @@ namespace hipanel\modules\document\models;
 use hipanel\base\ModelTrait;
 use hipanel\behaviors\File as FileBehavior;
 use hipanel\models\File as FileModel;
+use hipanel\modules\document\models\query\DocumentQuery;
 use Yii;
 
 /**
@@ -73,5 +74,21 @@ class Document extends \hipanel\base\Model
     public function getFile()
     {
         return $this->hasOne(FileModel::class, ['id' => 'id']);
+    }
+
+    public function getObject()
+    {
+        return $this->hasOne(Object::class, ['id' => 'object_id'])->via('file');
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return DocumentQuery
+     */
+    public static function find($options = [])
+    {
+        return new DocumentQuery(get_called_class(), [
+            'options' => $options,
+        ]);
     }
 }

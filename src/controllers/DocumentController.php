@@ -35,7 +35,7 @@ class DocumentController extends CrudController
                 'rules' => [
                     [
                         'allow'   => true,
-//                        'roles'   => ['manage'],
+                        'roles'   => ['manage'],
                     ],
                 ],
             ]
@@ -90,7 +90,9 @@ class DocumentController extends CrudController
             /** @var ViewAction $action */
             $action = $event->sender;
 
-            $action->getDataProvider()->query->joinWith('file');
+            $action->getDataProvider()->query
+                ->joinWith('file')
+                ->joinWith('object');
         };
     }
 
