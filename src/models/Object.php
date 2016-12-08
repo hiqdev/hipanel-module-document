@@ -2,12 +2,17 @@
 
 namespace hipanel\modules\document\models;
 
+use hipanel\base\ModelTrait;
 
 class Object extends \hipanel\base\Model
 {
-    public $id;
+    use ModelTrait;
 
-    public $name;
-
-    public $class_name;
+    public function rules()
+    {
+        return [
+            [['id'], 'integer'],
+            [['name', 'class_name'], 'safe']
+        ];
+    }
 }

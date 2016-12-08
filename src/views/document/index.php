@@ -10,6 +10,7 @@ use yii\helpers\Html;
  * @var \hipanel\modules\document\models\Document[] $models
  * @var array $types
  * @var array $states
+ * @var array $statuses
  */
 
 $this->title = Yii::t('hipanel:document', 'Documents');
@@ -20,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php $page = IndexPage::begin(compact('model', 'dataProvider')) ?>
 
-    <?= $page->setSearchFormData(compact(['types', 'states'])) ?>
+    <?= $page->setSearchFormData(compact(['types', 'states', 'statuses'])) ?>
 
     <?php $page->beginContent('main-actions') ?>
         <?= Html::a(Yii::t('hipanel:document', 'Create document'), 'create', ['class' => 'btn btn-sm btn-success']) ?>
@@ -53,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'client',
             'title',
             'type',
-            'state',
+            'statuses',
             'create_time',
         ],
     ]) ?>

@@ -11,8 +11,10 @@
 
 namespace hipanel\modules\document\grid;
 
+use hipanel\modules\document\widgets\DocumentStatuses;
 use hipanel\modules\document\widgets\DocumentType;
 use hipanel\modules\document\widgets\DocumentState;
+use hipanel\modules\document\widgets\ValidityWidget;
 use hiqdev\menumanager\MenuColumn;
 use hipanel\grid\BoxedGridView;
 use hipanel\grid\RefColumn;
@@ -36,7 +38,7 @@ class DocumentGridView extends BoxedGridView
                 'format' => 'raw',
                 'filterAttribute' => 'title_ilike',
                 'value' => function ($model) {
-                    return Html::a($model->title, ['@document/view', 'id' => $model->id]);
+                    return Html::a($model->title ?: Yii::t('hipanel:document', 'Untitled document'), ['@document/view', 'id' => $model->id]);
                 }
             ],
             'state' => [
@@ -77,6 +79,22 @@ class DocumentGridView extends BoxedGridView
                 'attribute' => 'file.create_time',
                 'label' => Yii::t('hipanel:document', 'Create time'),
                 'format' => 'datetime',
+            ],
+            'validity' => [
+                'label' => Yii::t('hipanel:document', 'Validity'),
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return ValidityWidget::widget(['model' => $model]);
+                }
+            ],
+            'statuses' => [
+                'label' => Yii::t('hipanel:document', 'Statuses'),
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return DocumentStatuses::widget([
+                        'model' => $model
+                    ]);
+                }
             ]
         ];
     }

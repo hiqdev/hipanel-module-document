@@ -49,14 +49,8 @@ class Document extends \hipanel\base\Model
         return [
             [['id', 'type_id', 'state_id', 'object_id', 'client_id', 'seller_id'], 'integer'],
             [['client', 'seller', 'title', 'description'], 'safe'],
-            [['create_time', 'update_time'], 'datetime'],
+            [['create_time', 'update_time', 'validity_start', 'validity_end'], 'datetime'],
             [['type', 'state'], 'safe'],
-
-            [['attachment'], 'safe', 'on' => ['create']],
-            [['type', 'title'], 'required', 'on' => ['create', 'update']],
-            [['description'], 'safe', 'on' => ['create', 'update']],
-            [['state_id', 'file_id'], 'integer', 'on' => ['create', 'update']],
-//            [['state'], 'required', 'on' => ['update']],
         ];
     }
 
@@ -79,6 +73,11 @@ class Document extends \hipanel\base\Model
     public function getObject()
     {
         return $this->hasOne(Object::class, ['id' => 'object_id'])->via('file');
+    }
+
+    public function getStatuses()
+    {
+        return $this->hasMany(Status::class, ['object_id' => 'id']);
     }
 
     /**

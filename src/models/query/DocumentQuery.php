@@ -10,6 +10,7 @@ class DocumentQuery extends ActiveQuery
     {
         $this->joinWith('file');
         $this->joinWith('object');
+        $this->joinWith('statuses');
 
         return $this;
     }

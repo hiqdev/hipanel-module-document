@@ -12,7 +12,7 @@ use hipanel\widgets\Box;
 use hiqdev\menumanager\widgets\DetailMenu;
 use yii\helpers\Html;
 
-$this->title = Html::encode($model->title);
+$this->title = Html::encode($model->title ?: Yii::t('hipanel:document', 'Untitled document'));
 $this->params['subtitle'] = Yii::t('hipanel:document', 'Document detailed information');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('hipanel:document', 'Documents'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -56,7 +56,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'size',
                         'filename',
                         'type',
-                        'state',
+                        'statuses',
+                        'validity',
                         'description',
                     ],
                 ]) ?>

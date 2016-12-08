@@ -7,6 +7,7 @@ use yii\helpers\Html;
  * @var \hipanel\modules\document\models\Document[] $models
  * @var array $types
  * @var array $states
+ * @var array $statuses
  */
 
 $this->title = Yii::t('hipanel', 'Update');
@@ -17,4 +18,4 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 
-<?= $this->render('_form', compact('model', 'types', 'states')) ?>
+<?= $this->render('_form', compact('model', 'documentForm', 'types', 'statuses')) ?>

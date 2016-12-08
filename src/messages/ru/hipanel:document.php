@@ -7,6 +7,9 @@ return [
     'Create time' => 'Дата создания',
     'Description' => 'Описание',
     'File' => 'Файл',
+    'Statuses' => 'Статусы',
+    'Validity start' => 'Начало действия',
+    'Validity end' => 'Окончание действия',
 
     'Person ID' => 'Удостоверение личности',
     'Agreement' => 'Договор',
@@ -25,5 +28,14 @@ return [
     'Filename' => 'Имя файла',
 
     'Download' => 'Скачать',
-    'Creation date' => 'Дата загрузки'
+    'Creation date' => 'Дата загрузки',
+
+    'Untitled document' => 'Безимянный документ',
+    'Validity' => 'Срок действия',
+    'Not set' => 'Не указан',
+
+    'Added {date} by {login}' => 'Установил {login} {date}',
+
+    'Signed' => 'Подписан',
+    'Verified' => 'Верифицирован',
 ];
