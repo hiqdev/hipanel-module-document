@@ -15,6 +15,7 @@ use Guzzle\Plugin\ErrorResponse\Exception\ErrorResponseException;
 use hipanel\actions\IndexAction;
 use hipanel\actions\OrientationAction;
 use hipanel\actions\SmartCreateAction;
+use hipanel\actions\SmartDeleteAction;
 use hipanel\actions\SmartUpdateAction;
 use hipanel\actions\ValidateFormAction;
 use hipanel\actions\ViewAction;
@@ -56,25 +57,34 @@ class DocumentController extends CrudController
             ],
             'create' => [
                 'class' => SmartCreateAction::class,
-                'success' => Yii::t('hipanel:document', 'Document was created successfully'),
+                'success' => Yii::t('hipanel:document', 'Document was created'),
                 'data' => function () {
                     return $this->getAdditionalData();
                 },
             ],
             'view' => [
                 'class' => ViewAction::class,
-                'on beforePerform' => $this->getBeforePerformClosure(),
+                'on beforePerform' => function ($event) {
+                    /** @var ViewAction $action */
+                    $action = $event->sender;
+
+                    $action->getDataProvider()->query->details()->showDeleted();
+                },
                 'data' => function () {
                     return $this->getAdditionalData();
                 },
             ],
             'update' => [
                 'class' => SmartUpdateAction::class,
-                'success' => Yii::t('hipanel:document', 'Document was updated successfully'),
+                'success' => Yii::t('hipanel:document', 'Document was updated'),
                 'on beforeFetch' => $this->getBeforePerformClosure(),
                 'data' => function () {
                     return $this->getAdditionalData();
                 },
+            ],
+            'delete' => [
+                'class' => SmartDeleteAction::class,
+                'success' => Yii::t('hipanel:document', 'Document was deleted'),
             ],
             'validate-single-form' => [
                 'class' => ValidateFormAction::class,

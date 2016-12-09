@@ -23,6 +23,7 @@ class Document extends \hipanel\base\Model
 
     const SCENARIO_CREATE = 'create';
     const SCENARIO_UPDATE = 'update';
+    const SCENARIO_DELETE = 'delete';
 
     /**
      * @inheritdoc
@@ -80,7 +81,7 @@ class Document extends \hipanel\base\Model
                     return Yii::$app->user->can('document.manage');
                 },
             ],
-            [['id'], 'integer', 'on' => ['update']],
+            [['id'], 'required', 'on' => ['update', 'delete']],
         ];
     }
 
@@ -109,6 +110,11 @@ class Document extends \hipanel\base\Model
     public function getStatuses()
     {
         return $this->hasMany(Status::class, ['object_id' => 'id']);
+    }
+
+    public function isVerified()
+    {
+        return in_array('verified', (array) $this->status_types);
     }
 
     /**

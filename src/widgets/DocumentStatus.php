@@ -20,25 +20,31 @@ class DocumentStatus extends Widget
      */
     public $model;
 
+    /**
+     * @var array
+     */
+    public $statusCssClasses = [
+        'verified' => 'primary',
+        'signed' => 'success',
+        '*' => 'default'
+    ];
+
     public function run()
     {
         return Html::tag('span', Yii::t('hipanel:document', $this->model->type_label), [
-            'class' => 'label ' . $this->getStatusClass(),
+            'class' => 'label label-' . $this->getStatusClass(),
             'title' => $this->getTitle()
         ]);
     }
 
-    private function getStatusClass()
+    protected function getStatusClass()
     {
-        $map = [
-            'verified' => 'label-primary',
-            'signed' => 'label-success',
-        ];
-
-        return isset($map[$this->model->type]) ? $map[$this->model->type] : 'label-default';
+        return isset($this->statusCssClasses[$this->model->type])
+            ? $this->statusCssClasses[$this->model->type]
+            : $this->statusCssClasses['*'];
     }
 
-    private function getTitle()
+    protected function getTitle()
     {
         return Yii::t('hipanel:document', 'Added {date} by {login}', [
             'date' => Yii::$app->formatter->asDate($this->model->time),

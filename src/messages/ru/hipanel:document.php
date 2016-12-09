@@ -15,7 +15,11 @@ return [
     'Agreement' => 'Договор',
     'Invoice'   => 'Инвойс',
     'Acceptance report' => 'Акт выполненных работ',
+    'Acceptance' => 'Акт',
     'Other' => 'Другое',
+    'Related object' => 'Связанный объект',
+
+    'Contact: {link}' => 'Контакт: {link}',
 
     'Ok' => 'Ок',
     'Outdated' => 'Устаревший',
@@ -39,6 +43,8 @@ return [
     'Signed' => 'Подписан',
     'Verified' => 'Верифицирован',
 
-    'Document was updated successfully' => 'Документ был успешно изменён',
-    'Document was create successfully' => 'Документ был успешно создан',
+    'Document was updated' => 'Документ был изменён',
+    'Document was created' => 'Документ был создан',
+    'Document was deleted' => 'Документ был удалён',
+    'No documents found' => 'Документы отсутствуют'
 ];

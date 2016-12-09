@@ -38,26 +38,27 @@ class DocumentGridView extends BoxedGridView
                 'format' => 'raw',
                 'filterAttribute' => 'title_ilike',
                 'value' => function ($model) {
-                    return Html::a($model->title ?: Yii::t('hipanel:document', 'Untitled document'), ['@document/view', 'id' => $model->id]);
-                }
+                    return Html::a($model->title ?: Yii::t('hipanel:document', 'Untitled document'),
+                        ['@document/view', 'id' => $model->id]);
+                },
             ],
             'state' => [
-                'class'  => RefColumn::class,
+                'class' => RefColumn::class,
                 'filterAttribute' => 'state_in',
                 'format' => 'raw',
-                'gtype'  => 'state,document',
+                'gtype' => 'state,document',
                 'i18nDictionary' => 'hipanel:document',
-                'value'  => function ($model) {
+                'value' => function ($model) {
                     return DocumentState::widget(['model' => $model]);
                 },
             ],
             'type' => [
-                'class'  => RefColumn::class,
+                'class' => RefColumn::class,
                 'filterAttribute' => 'type_in',
                 'format' => 'raw',
-                'gtype'  => 'type,document',
+                'gtype' => 'type,document',
                 'i18nDictionary' => 'hipanel:document',
-                'value'  => function ($model) {
+                'value' => function ($model) {
                     return DocumentType::widget(['model' => $model]);
                 },
             ],
@@ -69,7 +70,7 @@ class DocumentGridView extends BoxedGridView
                 'label' => Yii::t('hipanel:document', 'Size'),
                 'value' => function ($model) {
                     return Yii::$app->formatter->asShortSize($model->file->size, 1);
-                }
+                },
             ],
             'filename' => [
                 'attribute' => 'file.filename',
@@ -85,17 +86,35 @@ class DocumentGridView extends BoxedGridView
                 'format' => 'raw',
                 'value' => function ($model) {
                     return ValidityWidget::widget(['model' => $model]);
-                }
+                },
             ],
             'statuses' => [
                 'label' => Yii::t('hipanel:document', 'Statuses'),
                 'format' => 'raw',
                 'value' => function ($model) {
                     return DocumentStatuses::widget([
-                        'model' => $model
+                        'model' => $model,
                     ]);
-                }
-            ]
+                },
+            ],
+            'object' => [
+                'label' => Yii::t('hipanel:document', 'Related object'),
+                'format' => 'raw',
+                'value' => function ($model) {
+                    if (($object = $model->object) === null) {
+                        return '';
+                    }
+
+                    switch ($object->class_name) {
+                        case 'contact':
+                            return Yii::t('hipanel:document', 'Contact: {link}', [
+                                'link' => Html::a($object->name, ['@contact/view', 'id' => $object->id])
+                            ]);
+                        default:
+                            return '';
+                    }
+                },
+            ],
         ];
     }
 }

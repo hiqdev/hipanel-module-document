@@ -61,7 +61,7 @@ use yii\widgets\ActiveForm;
             'hasId' => true,
         ]);
         if (Yii::$app->user->can('document.manage')) {
-            $model->status_types = implode(',', $model->status_types);
+            $model->status_types = is_array($model->status_types) ? implode(',', $model->status_types) : $model->status_types;
             echo $form->field($model, 'status_types')->widget(StaticCombo::class, [
                 'data' => $statuses,
                 'hasId' => true,
