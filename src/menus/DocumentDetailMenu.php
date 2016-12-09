@@ -5,6 +5,10 @@ namespace hipanel\modules\document\menus;
 use hipanel\modules\document\models\Document;
 use hiqdev\menumanager\Menu;
 
+/**
+ * Class DocumentDetailMenu
+ * @package hipanel\modules\document\menus
+ */
 class DocumentDetailMenu extends Menu
 {
     /**
