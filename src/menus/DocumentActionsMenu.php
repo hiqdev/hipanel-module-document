@@ -6,6 +6,10 @@ use hipanel\modules\document\models\Document;
 use hipanel\widgets\FileRender;
 use Yii;
 
+/**
+ * Class DocumentActionsMenu
+ * @package hipanel\modules\document\menus
+ */
 class DocumentActionsMenu extends \hiqdev\menumanager\Menu
 {
     /**
