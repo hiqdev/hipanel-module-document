@@ -1,10 +1,7 @@
 <?php
 
-use yii\helpers\Html;
-
 /**
  * @var \hipanel\modules\document\models\Document $model
- * @var \hipanel\modules\document\models\Document[] $models
  * @var array $types
  * @var array $states
  * @var array $statuses
@@ -18,4 +15,4 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 
-<?= $this->render('_form', compact('model', 'documentForm', 'types', 'statuses')) ?>
+<?= $this->render('_form', compact('model', 'types', 'statuses')) ?>

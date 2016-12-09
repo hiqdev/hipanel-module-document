@@ -52,11 +52,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     'columns' => [
                         'seller_id',
                         'client_id',
-                        'create_time',
-                        'size',
                         'filename',
+                        'size',
                         'type',
                         'statuses',
+                        'create_time',
                         'validity',
                         'description',
                     ],

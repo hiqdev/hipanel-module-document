@@ -21,6 +21,9 @@ class Document extends \hipanel\base\Model
 {
     use ModelTrait;
 
+    const SCENARIO_CREATE = 'create';
+    const SCENARIO_UPDATE = 'update';
+
     /**
      * @inheritdoc
      */
@@ -49,8 +52,35 @@ class Document extends \hipanel\base\Model
         return [
             [['id', 'type_id', 'state_id', 'object_id', 'client_id', 'seller_id'], 'integer'],
             [['client', 'seller', 'title', 'description'], 'safe'],
-            [['create_time', 'update_time', 'validity_start', 'validity_end'], 'datetime'],
+            [['create_time', 'update_time'], 'datetime'],
             [['type', 'state'], 'safe'],
+
+            [['client', 'attachment'], 'safe', 'on' => ['create']],
+            [['type', 'title'], 'required', 'on' => ['create', 'update']],
+            [['description', 'status_types'], 'safe', 'on' => ['create', 'update']],
+            [['file_id'], 'integer', 'on' => ['create', 'update']],
+            [
+                ['validity_start', 'validity_end'],
+                'datetime',
+                'format' => 'php:Y-m-d',
+                'on' => ['create', 'update'],
+                'enableClientValidation' => false,
+                'when' => function () {
+                    return Yii::$app->user->can('document.manage');
+                },
+            ],
+            [
+                ['validity_end'],
+                'compare',
+                'compareAttribute' => 'validity_start',
+                'operator' => '>',
+                'on' => ['create', 'update'],
+                'enableClientValidation' => false,
+                'when' => function () {
+                    return Yii::$app->user->can('document.manage');
+                },
+            ],
+            [['id'], 'integer', 'on' => ['update']],
         ];
     }
 
@@ -62,6 +92,7 @@ class Document extends \hipanel\base\Model
         return $this->mergeAttributeLabels([
             'type_id' => Yii::t('hipanel', 'Type'),
             'attachment' => Yii::t('hipanel:document', 'File'),
+            'status_types' => Yii::t('hipanel:document', 'Statuses'),
         ]);
     }
 

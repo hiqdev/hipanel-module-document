@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @var \hipanel\modules\document\forms\DocumentForm $documentForm
+ * @var \hipanel\modules\document\models\Document $model
  * @var array $types
  * @var array $states
  * @var array $statuses
@@ -13,4 +13,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?= $this->render('_form', compact('documentForm', 'types', 'states', 'statuses')) ?>
+<?= $this->render('_form', compact('model', 'types', 'states', 'statuses')) ?>

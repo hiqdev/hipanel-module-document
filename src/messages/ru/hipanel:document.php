@@ -38,4 +38,7 @@ return [
 
     'Signed' => 'Подписан',
     'Verified' => 'Верифицирован',
+
+    'Document was updated successfully' => 'Документ был успешно изменён',
+    'Document was create successfully' => 'Документ был успешно создан',
 ];

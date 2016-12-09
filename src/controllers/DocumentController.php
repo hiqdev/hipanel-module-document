@@ -19,11 +19,8 @@ use hipanel\actions\SmartUpdateAction;
 use hipanel\actions\ValidateFormAction;
 use hipanel\actions\ViewAction;
 use hipanel\base\CrudController;
-use hipanel\modules\document\forms\DocumentForm;
-use hipanel\modules\document\repository\DocumentRepository;
 use Yii;
 use yii\filters\AccessControl;
-use yii\web\NotFoundHttpException;
 
 /**
  * Class DocumentController
@@ -31,18 +28,6 @@ use yii\web\NotFoundHttpException;
  */
 class DocumentController extends CrudController
 {
-    /**
-     * @var DocumentRepository
-     */
-    protected $documentRepository;
-
-    public function __construct($id, $module, DocumentRepository $documentRepository, $config = [])
-    {
-        parent::__construct($id, $module, $config);
-
-        $this->documentRepository = $documentRepository;
-    }
-
     public function behaviors()
     {
         return array_merge(parent::behaviors(), [
@@ -69,18 +54,30 @@ class DocumentController extends CrudController
                 },
                 'on beforePerform' => $this->getBeforePerformClosure(),
             ],
-            'view' => [
-                'class' => ViewAction::class,
+            'create' => [
+                'class' => SmartCreateAction::class,
+                'success' => Yii::t('hipanel:document', 'Document was created successfully'),
                 'data' => function () {
                     return $this->getAdditionalData();
                 },
+            ],
+            'view' => [
+                'class' => ViewAction::class,
                 'on beforePerform' => $this->getBeforePerformClosure(),
+                'data' => function () {
+                    return $this->getAdditionalData();
+                },
+            ],
+            'update' => [
+                'class' => SmartUpdateAction::class,
+                'success' => Yii::t('hipanel:document', 'Document was updated successfully'),
+                'on beforeFetch' => $this->getBeforePerformClosure(),
+                'data' => function () {
+                    return $this->getAdditionalData();
+                },
             ],
             'validate-single-form' => [
                 'class' => ValidateFormAction::class,
-                'collection' => [
-                    'model' => DocumentForm::class,
-                ],
                 'validatedInputId' => false
             ],
             'set-orientation' => [
@@ -88,42 +85,6 @@ class DocumentController extends CrudController
                 'allowedRoutes' => ['@document/index'],
             ],
         ];
-    }
-
-    public function actionCreate()
-    {
-        $form = new DocumentForm(['scenario' => 'create']);
-
-        if (Yii::$app->request->isPost && $form->load(Yii::$app->request->post())) {
-            if ($id = $this->documentRepository->insert($form)) {
-                return $this->redirect(['view', 'id' => $id]);
-            }
-        }
-
-        return $this->render('create', array_merge($this->getAdditionalData(), [
-            'documentForm' => $form,
-        ]));
-    }
-
-    public function actionUpdate($id)
-    {
-        $repository = $this->documentRepository;
-        $document = $repository->getById($id);
-        if ($document === null) {
-            throw new NotFoundHttpException('Document is not available');
-        }
-
-        $form = new DocumentForm(['scenario' => 'update']);
-        $form->fromDocument($document);
-
-        if (Yii::$app->request->isPost && $form->load(Yii::$app->request->post()) && $repository->update($form)) {
-            return $this->redirect(['view', 'id' => $id]);
-        }
-
-        return $this->render('update', array_merge($this->getAdditionalData(), [
-            'model' => $document,
-            'documentForm' => $form,
-        ]));
     }
 
     private function getAdditionalData()
