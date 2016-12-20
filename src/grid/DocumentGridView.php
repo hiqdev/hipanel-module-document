@@ -11,7 +11,9 @@
 
 namespace hipanel\modules\document\grid;
 
+use hipanel\modules\document\widgets\DocumentRelationWidget;
 use hipanel\modules\document\widgets\DocumentStatuses;
+use hipanel\modules\document\widgets\DocumentStatusIcons;
 use hipanel\modules\document\widgets\DocumentType;
 use hipanel\modules\document\widgets\DocumentState;
 use hipanel\modules\document\widgets\ValidityWidget;
@@ -38,8 +40,10 @@ class DocumentGridView extends BoxedGridView
                 'format' => 'raw',
                 'filterAttribute' => 'title_ilike',
                 'value' => function ($model) {
-                    return Html::a($model->title ?: Yii::t('hipanel:document', 'Untitled document'),
-                        ['@document/view', 'id' => $model->id]);
+                    return implode(' ', [
+                        DocumentType::widget(['model' => $model]),
+                        Html::a($model->title ?: Yii::t('hipanel:document', 'Untitled document'), ['@document/view', 'id' => $model->id]),
+                    ]);
                 },
             ],
             'state' => [
@@ -92,29 +96,23 @@ class DocumentGridView extends BoxedGridView
                 'label' => Yii::t('hipanel:document', 'Statuses'),
                 'format' => 'raw',
                 'value' => function ($model) {
-                    return DocumentStatuses::widget([
-                        'model' => $model,
-                    ]);
+                    return DocumentStatuses::widget(['model' => $model]);
                 },
             ],
             'object' => [
                 'label' => Yii::t('hipanel:document', 'Related object'),
                 'format' => 'raw',
                 'value' => function ($model) {
-                    if (($object = $model->object) === null) {
-                        return '';
-                    }
-
-                    switch ($object->class_name) {
-                        case 'contact':
-                            return Yii::t('hipanel:document', 'Contact: {link}', [
-                                'link' => Html::a($object->name, ['@contact/view', 'id' => $object->id])
-                            ]);
-                        default:
-                            return '';
-                    }
+                    return DocumentRelationWidget::widget(['model' => $model->object]);
                 },
             ],
+            'status_and_type' => [
+                'label' => Yii::t('hipanel:document', 'Statuses'),
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return DocumentState::widget(['model' => $model]) . ' ' . DocumentStatusIcons::widget(['model' => $model]);
+                }
+            ]
         ];
     }
 }

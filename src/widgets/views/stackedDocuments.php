@@ -5,6 +5,7 @@
  * @var \yii\web\View $this
  */
 
+use hipanel\modules\document\widgets\DocumentStatusIcons;
 use yii\helpers\Html;
 
 ?>
@@ -30,11 +31,7 @@ use yii\helpers\Html;
                                     ]); ?>
                                 </div>
                                 <div class="statuses">
-                                    <?php foreach ($document->statuses as $status) : ?>
-                                        <?= \hipanel\modules\document\widgets\DocumentStatusIcon::widget([
-                                            'model' => $status,
-                                        ]); ?>
-                                    <?php endforeach; ?>
+                                    <?= DocumentStatusIcons::widget(['model' => $document]) ?>
                                     <?= Html::a('<i class="fa fa-external-link"></i>',
                                         ['@document/view', 'id' => $document->id], [
                                             'class' => 'pull-right btn btn-default btn-xs',

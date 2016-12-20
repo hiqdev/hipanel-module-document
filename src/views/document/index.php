@@ -53,8 +53,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'seller',
             'client',
             'title',
-            'type',
-            'statuses',
+            'status_and_type',
+            'object',
             'create_time',
         ],
     ]) ?>
