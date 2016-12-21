@@ -7,9 +7,9 @@
  * @var array $states
  */
 
+use hipanel\modules\document\grid\DocumentGridView;
 use hipanel\modules\document\menus\DocumentDetailMenu;
 use hipanel\widgets\Box;
-use hiqdev\menumanager\widgets\DetailMenu;
 use yii\helpers\Html;
 
 $this->title = Html::encode($model->title ?: Yii::t('hipanel:document', 'Untitled document'));
@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ]) ?>
         </div>
         <div class="profile-usermenu">
-            <?= DocumentDetailMenu::create(['model' => $model])->render(DetailMenu::class) ?>
+            <?= DocumentDetailMenu::widget(['model' => $model]) ?>
         </div>
         <?php Box::end() ?>
     </div>
@@ -46,19 +46,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'title' => Yii::t('hipanel:document', 'Document information'),
         ]) ?>
             <?php $box->beginBody() ?>
-                <?= \hipanel\modules\document\grid\DocumentGridView::detailView([
+                <?= DocumentGridView::detailView([
                     'boxed'   => false,
                     'model'   => $model,
                     'columns' => [
-                        'seller_id',
-                        'client_id',
-                        'object',
-                        'filename',
-                        'size',
-                        'type',
-                        'statuses',
-                        'create_time',
-                        'validity',
+                        'seller_id', 'client_id',
+                        'object', 'filename',
+                        'size', 'type', 'statuses',
+                        'create_time', 'validity',
                         'description',
                     ],
                 ]) ?>
