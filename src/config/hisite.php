@@ -18,18 +18,18 @@ return [
                 ],
             ],
         ],
-        'menuManager' => [
-            'items' => [
-                'sidebar' => [
-                    'add' => [
-                        'client' => [
-                            'menu' => [
-                                'merge' => [
-                                    'document' => [
-                                        'menu' => \hipanel\modules\document\menus\SidebarSubMenu::class,
-                                        'where' => [
-                                            'after' => ['contacts'],
-                                        ],
+    ],
+    'container' => [
+        'definitions' => [
+            \hiqdev\thememanager\menus\AbstractSidebarMenu::class => [
+                'add' => [
+                    'client' => [
+                        'menu' => [
+                            'merge' => [
+                                'document' => [
+                                    'menu' => \hipanel\modules\document\menus\SidebarSubMenu::class,
+                                    'where' => [
+                                        'after' => ['contacts'],
                                     ],
                                 ],
                             ],
