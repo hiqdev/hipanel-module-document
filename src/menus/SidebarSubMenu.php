@@ -17,7 +17,7 @@ use Yii;
  * Class SidebarSubMenu
  * @package hipanel\modules\document\menus
  */
-class SidebarSubMenu extends \hiqdev\menumanager\Menu
+class SidebarSubMenu extends \hiqdev\yii2\menus\Menu
 {
     public function items()
     {

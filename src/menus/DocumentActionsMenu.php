@@ -10,7 +10,7 @@ use Yii;
  * Class DocumentActionsMenu
  * @package hipanel\modules\document\menus
  */
-class DocumentActionsMenu extends \hiqdev\menumanager\Menu
+class DocumentActionsMenu extends \hiqdev\yii2\menus\Menu
 {
     /**
      * @var Document

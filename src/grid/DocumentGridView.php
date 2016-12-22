@@ -17,7 +17,7 @@ use hipanel\modules\document\widgets\DocumentStatusIcons;
 use hipanel\modules\document\widgets\DocumentType;
 use hipanel\modules\document\widgets\DocumentState;
 use hipanel\modules\document\widgets\ValidityWidget;
-use hiqdev\menumanager\MenuColumn;
+use hiqdev\yii2\menus\grid\MenuColumn;
 use hipanel\grid\BoxedGridView;
 use hipanel\grid\RefColumn;
 use hipanel\modules\client\menus\ClientActionsMenu;
