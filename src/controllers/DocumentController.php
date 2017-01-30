@@ -11,7 +11,6 @@
 
 namespace hipanel\modules\document\controllers;
 
-use Guzzle\Plugin\ErrorResponse\Exception\ErrorResponseException;
 use hipanel\actions\IndexAction;
 use hipanel\actions\OrientationAction;
 use hipanel\actions\SmartCreateAction;
