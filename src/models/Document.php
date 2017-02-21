@@ -4,7 +4,7 @@ namespace hipanel\modules\document\models;
 
 use hipanel\base\ModelTrait;
 use hipanel\behaviors\File as FileBehavior;
-use hipanel\models\File as FileModel;
+use hipanel\models\File;
 use hipanel\modules\document\models\query\DocumentQuery;
 use Yii;
 
@@ -55,6 +55,7 @@ class Document extends \hipanel\base\Model
             [['client', 'seller', 'title', 'description'], 'safe'],
             [['create_time', 'update_time'], 'datetime'],
             [['type', 'state'], 'safe'],
+            [['filename'], 'string'],
 
             [['client', 'attachment'], 'safe', 'on' => ['create']],
             [['type', 'title'], 'required', 'on' => ['create', 'update']],
@@ -99,7 +100,7 @@ class Document extends \hipanel\base\Model
 
     public function getFile()
     {
-        return $this->hasOne(FileModel::class, ['id' => 'id']);
+        return $this->hasOne(File::class, ['id' => 'file_id']);
     }
 
     public function getObject()
