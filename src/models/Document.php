@@ -6,6 +6,8 @@ use hipanel\base\ModelTrait;
 use hipanel\behaviors\File as FileBehavior;
 use hipanel\models\File;
 use hipanel\modules\document\models\query\DocumentQuery;
+use paulzi\jsonBehavior\JsonBehavior;
+use paulzi\jsonBehavior\JsonValidator;
 use Yii;
 
 /**
@@ -42,6 +44,10 @@ class Document extends \hipanel\base\Model
                 'targetAttribute' => 'file_id',
                 'scenarios' => ['create'],
             ],
+            [
+                'class' => JsonBehavior::class,
+                'attributes' => ['data']
+            ]
         ];
     }
 
@@ -53,7 +59,7 @@ class Document extends \hipanel\base\Model
         return [
             [['id', 'type_id', 'state_id', 'object_id', 'client_id', 'seller_id'], 'integer'],
             [['client', 'seller', 'title', 'description'], 'safe'],
-            [['create_time', 'update_time'], 'datetime'],
+            [['create_time', 'update_time'], 'safe'],
             [['type', 'state'], 'safe'],
             [['filename'], 'string'],
 
@@ -83,6 +89,7 @@ class Document extends \hipanel\base\Model
                 },
             ],
             [['id'], 'required', 'on' => ['update', 'delete']],
+            [['data'], JsonValidator::class]
         ];
     }
 

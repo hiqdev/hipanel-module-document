@@ -46,7 +46,8 @@
     ],
     "require": {
         "yiisoft/yii2": "^2.0",
-        "hiqdev/hipanel-core": "<2.0 || dev-master"
+        "hiqdev/hipanel-core": "<2.0 || dev-master",
+        "paulzi/yii2-json-behavior": "^1.0"
     },
     "require-dev": {
         "hiqdev/hidev-php": "<2.0",
