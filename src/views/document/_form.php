@@ -46,6 +46,10 @@ use yii\widgets\ActiveForm;
             'options' => ['enctype' => 'multipart/form-data'],
         ]);
 
+        if ($model->scenario === \hipanel\modules\document\models\Document::SCENARIO_UPDATE) {
+            echo Html::activeHiddenInput($model, 'file_id');
+        }
+
         echo $form->field($model, 'id')->hiddenInput()->label(false);
         if (Yii::$app->user->can('document.manage')) {
             echo $form->field($model, 'client')->widget(ClientCombo::class, [
