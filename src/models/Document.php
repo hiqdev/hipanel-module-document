@@ -69,10 +69,8 @@ class Document extends \hipanel\base\Model
             [['file_id'], 'integer', 'on' => ['create', 'update']],
             [
                 ['validity_start', 'validity_end'],
-                'datetime',
-                'format' => 'php:Y-m-d',
+                'safe',
                 'on' => ['create', 'update'],
-                'enableClientValidation' => false,
                 'when' => function () {
                     return Yii::$app->user->can('document.manage');
                 },
