@@ -5,6 +5,7 @@ namespace hipanel\modules\document\widgets;
 
 use DateTime;
 use hipanel\modules\document\models\Document;
+use Yii;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 
@@ -29,7 +30,7 @@ class StackedDocumentsView extends Widget
     {
         $grouped = ArrayHelper::index($this->models, 'id', [
             function ($document) {
-                return (new DateTime($document->create_time))->modify('today')->format('U');
+                return (new DateTime($document->create_time))->modify('today')->format('Y-m');
             },
         ]);
 
