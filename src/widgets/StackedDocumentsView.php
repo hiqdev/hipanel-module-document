@@ -18,7 +18,7 @@ class StackedDocumentsView extends Widget
     /**
      * @var int thumbnail size. Will be used for both width and height
      */
-    public $thumbSize = 75;
+    public $thumbSize = 64;
 
     public function run()
     {
