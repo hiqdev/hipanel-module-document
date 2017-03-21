@@ -16,15 +16,15 @@ use yii\helpers\Html;
 class DocumentStatusIcon extends DocumentStatus
 {
     public $statusCssClasses = [
-        'verified' => 'success fa fa-check',
-        'signed' => 'info fa fa-certificate',
+        'verified' => 'green fa fa-check',
+        'signed' => 'light-blue fa fa-certificate',
         '*' => 'default'
     ];
 
     public function run()
     {
-        return Html::tag('i', '', [
-            'class' => 'text-' . $this->getStatusClass(),
+        return Html::tag('span', ' ', [
+            'class' => 'badge bg-' . $this->getStatusClass(),
             'title' => Yii::t('hipanel:document', $this->model->type_label) . ' - ' . $this->getTitle(),
         ]);
     }
