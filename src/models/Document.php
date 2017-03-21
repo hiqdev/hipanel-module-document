@@ -120,7 +120,7 @@ class Document extends \hipanel\base\Model
 
     public function isVerified()
     {
-        return in_array('verified', (array) $this->status_types);
+        return in_array('verified', (array)$this->status_types);
     }
 
     /**
@@ -132,5 +132,10 @@ class Document extends \hipanel\base\Model
         return new DocumentQuery(get_called_class(), [
             'options' => $options,
         ]);
+    }
+
+    public function getDisplayTitle()
+    {
+        return $this->title ?: Yii::t('hipanel:document', 'Untitled document');
     }
 }
