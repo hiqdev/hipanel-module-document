@@ -42,7 +42,7 @@ class DocumentGridView extends BoxedGridView
                 'value' => function ($model) {
                     return implode(' ', [
                         DocumentType::widget(['model' => $model]),
-                        Html::a($model->title ?: Yii::t('hipanel:document', 'Untitled document'), ['@document/view', 'id' => $model->id]),
+                        Html::a($model->getDisplayTitle(), ['@document/view', 'id' => $model->id]),
                     ]);
                 },
             ],
