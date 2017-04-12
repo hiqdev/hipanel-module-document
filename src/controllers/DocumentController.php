@@ -89,10 +89,6 @@ class DocumentController extends CrudController
                 'class' => ValidateFormAction::class,
                 'validatedInputId' => false
             ],
-            'set-orientation' => [
-                'class' => OrientationAction::class,
-                'allowedRoutes' => ['@document/index'],
-            ],
         ];
     }
 
