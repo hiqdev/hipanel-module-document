@@ -37,7 +37,7 @@ return [
     'Download' => 'Скачать',
     'Creation date' => 'Дата загрузки',
 
-    'Untitled document' => 'Безимянный документ',
+    'Untitled document' => 'Безымянный документ',
     'Validity' => 'Срок действия',
     'Not set' => 'Не указан',
 
