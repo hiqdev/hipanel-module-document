@@ -33,9 +33,9 @@ class DocumentGridView extends BoxedGridView
     /**
      * @inheritdoc
      */
-    public static function defaultColumns()
+    public function columns()
     {
-        return [
+        return array_merge(parent::columns(), [
             'title' => [
                 'format' => 'raw',
                 'filterAttribute' => 'title_ilike',
@@ -113,6 +113,6 @@ class DocumentGridView extends BoxedGridView
                     return DocumentState::widget(['model' => $model]) . ' ' . DocumentStatusIcons::widget(['model' => $model]);
                 }
             ]
-        ];
+        ]);
     }
 }
