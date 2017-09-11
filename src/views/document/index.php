@@ -27,8 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('hipanel:document', 'Create document'), 'create', ['class' => 'btn btn-sm btn-success']) ?>
     <?php $page->endContent() ?>
 
-    <?php $page->beginContent('show-actions') ?>
-        <?= $page->renderLayoutSwitcher() ?>
+    <?php $page->beginContent('sorter-actions') ?>
         <?= $page->renderSorter([
             'attributes' => [
                 'title',
@@ -39,7 +38,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'create_time',
             ],
         ]) ?>
-        <?= $page->renderPerPage() ?>
     <?php $page->endContent() ?>
 
     <?php $page->beginContent('table') ?>
