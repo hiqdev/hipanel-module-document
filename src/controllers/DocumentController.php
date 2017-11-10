@@ -46,7 +46,7 @@ class DocumentController extends CrudController
 
     public function actions()
     {
-        return [
+        return array_merge(parent::actions(), [
             'index' => [
                 'class' => IndexAction::class,
                 'data' => function () {
@@ -89,7 +89,7 @@ class DocumentController extends CrudController
                 'class' => ValidateFormAction::class,
                 'validatedInputId' => false
             ],
-        ];
+        ]);
     }
 
     private function getAdditionalData()
