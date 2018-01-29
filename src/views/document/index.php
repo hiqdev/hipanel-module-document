@@ -41,22 +41,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php $page->endContent() ?>
 
     <?php $page->beginContent('table') ?>
-    <?php $page->beginBulkForm() ?>
-    <?= DocumentGridView::widget([
-        'boxed' => false,
-        'dataProvider' => $dataProvider,
-        'filterModel'  => $model,
-        'columns'      => [
-            'checkbox',
-            'seller',
-            'client_like',
-            'title',
-            'status_and_type',
-            'object',
-            'create_time',
-        ],
-    ]) ?>
-    <?php $page->endBulkForm() ?>
+        <?php $page->beginBulkForm() ?>
+            <?= DocumentGridView::widget([
+                'boxed' => false,
+                'dataProvider' => $dataProvider,
+                'filterModel'  => $model,
+                'columns' => $representationCollection->getByName($uiModel->representation)->getColumns(),
+            ]) ?>
+        <?php $page->endBulkForm() ?>
     <?php $page->endContent() ?>
 
 <?php $page->end() ?>
