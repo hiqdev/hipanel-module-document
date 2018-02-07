@@ -1,7 +1,6 @@
-HiPanel Documents Package
-=========================
+# HiPanel Documents Module
 
-**HiPanel Documents package**
+**Documents module for HiPanel**
 
 [![Latest Stable Version](https://poser.pugx.org/hiqdev/hipanel-module-document/v/stable)](https://packagist.org/packages/hiqdev/hipanel-module-document)
 [![Total Downloads](https://poser.pugx.org/hiqdev/hipanel-module-document/downloads)](https://packagist.org/packages/hiqdev/hipanel-module-document)
@@ -12,9 +11,15 @@ HiPanel Documents Package
 
 [![Logo](https://raw.githubusercontent.com/hiqdev/hipanel-core/master/docs/logo.png)](https://hipanel.com/)
 
-[HiPanel](http://hipanel.com) is next generation control panel for hosting, domains and more.
+[HiPanel] is next generation control panel for hosting, domains and more.
 
-This package is the core of the system.
+This package provides document management for HiPanel:
+
+- display and search
+- creation and importing
+- generation by templates
+
+[HiPanel]: https://hipanel.com/
 
 ## Installation
 
@@ -39,4 +44,4 @@ to the require section of your composer.json.
 This project is released under the terms of the BSD-3-Clause [license](LICENSE).
 Read more [here](http://choosealicense.com/licenses/bsd-3-clause).
 
-Copyright © 2016, HiQDev (http://hiqdev.com/)
+Copyright © 2016-2018, HiQDev (http://hiqdev.com/)

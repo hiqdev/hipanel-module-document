@@ -1,15 +1,19 @@
 package:
     type:           yii2-extension
     name:           hipanel-module-document
-    title:          HiPanel Documents package
-    headline:       HiPanel Documents Package
+    title:          Documents module for HiPanel
+    headline:       HiPanel Documents Module
     homepage:       https://hipanel.com/
     keywords:       hipanel, control panel, hosting, domains, documents
-    namespace:      hipanel\modules\document
-    description: |
+    description:    |
         [![Logo](https://raw.githubusercontent.com/hiqdev/hipanel-core/master/docs/logo.png)](https://hipanel.com/)
 
-        [HiPanel](http://hipanel.com) is next generation control panel for hosting, domains and more.
+        [HiPanel] is next generation control panel for hosting, domains and more.
 
-        This package is the core of the system.
+        This package provides document management for HiPanel:
 
+        - display and search
+        - creation and importing
+        - generation by templates
+
+        [HiPanel]: https://hipanel.com/
