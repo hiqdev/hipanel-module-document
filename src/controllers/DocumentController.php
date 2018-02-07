@@ -17,8 +17,8 @@ use hipanel\actions\SmartUpdateAction;
 use hipanel\actions\ValidateFormAction;
 use hipanel\actions\ViewAction;
 use hipanel\base\CrudController;
+use hipanel\filters\EasyAccessControl;
 use Yii;
-use yii\filters\AccessControl;
 
 /**
  * Class DocumentController
@@ -29,16 +29,15 @@ class DocumentController extends CrudController
     public function behaviors()
     {
         return array_merge(parent::behaviors(), [
-            'manage-access' => [
-                'class' => AccessControl::class,
-                'only' => ['update', 'delete'],
-                'rules' => [
-                    [
-                        'allow'   => true,
-                        'roles'   => ['manage'],
-                    ],
+            'access-document' => [
+                'class' => EasyAccessControl::class,
+                'actions' => [
+                    'create,import,copy'    => 'document.create',
+                    'update'                => 'document.update',
+                    'delete'                => 'document.delete',
+                    '*'                     => 'document.read',
                 ],
-            ]
+            ],
         ]);
     }
 

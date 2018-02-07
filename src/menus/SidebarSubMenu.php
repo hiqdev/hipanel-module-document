@@ -26,6 +26,7 @@ class SidebarSubMenu extends \hiqdev\yii2\menus\Menu
                     'documents' => [
                         'label' => Yii::t('hipanel:document', 'Documents'),
                         'url' => ['/document/document/index'],
+                        'visible' => Yii::$app->user->can('document.read'),
                     ],
                 ],
             ],
