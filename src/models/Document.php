@@ -1,4 +1,12 @@
 <?php
+/**
+ * Documents module for HiPanel
+ *
+ * @link      https://hipanel.com/
+ * @package   hipanel-module-document
+ * @license   BSD-3-Clause
+ * @copyright Copyright (c) 2016-2018, HiQDev (http://hiqdev.com/)
+ */
 
 namespace hipanel\modules\document\models;
 
@@ -11,13 +19,11 @@ use paulzi\jsonBehavior\JsonValidator;
 use Yii;
 
 /**
- * Class Document represents document
+ * Class Document represents document.
  *
  * @property int $id
  * @property string $title
  * @property string $description
- *
- * @package hipanel\modules\document\models
  */
 class Document extends \hipanel\base\Model
 {
@@ -28,7 +34,7 @@ class Document extends \hipanel\base\Model
     const SCENARIO_DELETE = 'delete';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static $i18nDictionary = 'hipanel:document';
 
@@ -46,13 +52,13 @@ class Document extends \hipanel\base\Model
             ],
             [
                 'class' => JsonBehavior::class,
-                'attributes' => ['data']
-            ]
+                'attributes' => ['data'],
+            ],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -87,7 +93,7 @@ class Document extends \hipanel\base\Model
                 },
             ],
             [['id'], 'required', 'on' => ['update', 'delete']],
-            [['data'], JsonValidator::class]
+            [['data'], JsonValidator::class],
         ];
     }
 
@@ -120,7 +126,7 @@ class Document extends \hipanel\base\Model
 
     public function isVerified()
     {
-        return in_array('verified', (array)$this->status_types);
+        return in_array('verified', (array) $this->status_types, true);
     }
 
     /**

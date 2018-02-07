@@ -1,17 +1,22 @@
 <?php
+/**
+ * Documents module for HiPanel
+ *
+ * @link      https://hipanel.com/
+ * @package   hipanel-module-document
+ * @license   BSD-3-Clause
+ * @copyright Copyright (c) 2016-2018, HiQDev (http://hiqdev.com/)
+ */
 
 namespace hipanel\modules\document\widgets;
 
 use hipanel\modules\document\models\Status;
-use hipanel\widgets\Type;
 use Yii;
 use yii\base\Widget;
 use yii\helpers\Html;
 
 /**
- * Class DocumentStatus
- *
- * @package hipanel\modules\document\widgets
+ * Class DocumentStatus.
  */
 class DocumentStatus extends Widget
 {
@@ -26,14 +31,14 @@ class DocumentStatus extends Widget
     public $statusCssClasses = [
         'verified' => 'primary',
         'signed' => 'success',
-        '*' => 'default'
+        '*' => 'default',
     ];
 
     public function run()
     {
         return Html::tag('span', Yii::t('hipanel:document', $this->model->type_label), [
             'class' => 'label label-' . $this->getStatusClass(),
-            'title' => $this->getTitle()
+            'title' => $this->getTitle(),
         ]);
     }
 

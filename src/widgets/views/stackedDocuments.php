@@ -1,10 +1,9 @@
 <?php
 
 /**
- * @var array $groups
+ * @var array
  * @var \yii\web\View $this
  */
-
 use hipanel\helpers\StringHelper;
 use hipanel\modules\document\widgets\DocumentStatusIcons;
 use yii\helpers\Html;
@@ -99,7 +98,7 @@ CSS
 <div class="stacked-documents">
     <?php if (count($groups)) : ?>
         <?php foreach ($groups as $date => $documents) :
-            /** @var \hipanel\modules\document\models\Document[] $documents */ ?>
+/** @var \hipanel\modules\document\models\Document[] $documents */ ?>
             <div class="group">
                 <div class="title">
                     <i class="fa fa-calendar"></i>&nbsp;&nbsp;<?= Yii::$app->formatter->asDate($date, 'LLLL Y') ?>
@@ -135,10 +134,10 @@ CSS
                             </div>
                         </div>
                         <?php
-                        if ($iteration % 2 == 0) {
+                        if ($iteration % 2 === 0) {
                             echo Html::tag('div', '', ['class' => 'clearfix']);
                         }
-                        $iteration++;
+                        ++$iteration;
                         ?>
                     <?php endforeach; ?>
                 </div>

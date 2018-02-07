@@ -7,7 +7,7 @@ use hiqdev\combo\StaticCombo;
 use yii\helpers\Html;
 
 /**
- * @var \hipanel\widgets\AdvancedSearch $search
+ * @var \hipanel\widgets\AdvancedSearch
  * @var array $states
  * @var array $types
  */
@@ -33,7 +33,8 @@ use yii\helpers\Html;
     ]) ?>
 </div>
 
-<?php if (Yii::$app->user->can('support')) { ?>
+<?php if (Yii::$app->user->can('support')) {
+        ?>
     <div class="col-md-4 col-sm-6 col-xs-12">
         <?= $search->field('client_id')->widget(ClientCombo::class) ?>
     </div>
@@ -41,7 +42,8 @@ use yii\helpers\Html;
     <div class="col-md-4 col-sm-6 col-xs-12">
         <?= $search->field('seller_id')->widget(SellerCombo::class) ?>
     </div>
-<?php } ?>
+<?php
+    } ?>
 
 <div class="col-md-4 col-sm-6 col-xs-12">
     <div class="form-group">

@@ -1,24 +1,27 @@
 <?php
+/**
+ * Documents module for HiPanel
+ *
+ * @link      https://hipanel.com/
+ * @package   hipanel-module-document
+ * @license   BSD-3-Clause
+ * @copyright Copyright (c) 2016-2018, HiQDev (http://hiqdev.com/)
+ */
 
 namespace hipanel\modules\document\widgets;
 
-use hipanel\modules\document\models\Status;
-use hipanel\widgets\Type;
 use Yii;
-use yii\base\Widget;
 use yii\helpers\Html;
 
 /**
- * Class DocumentStatusIcon
- *
- * @package hipanel\modules\document\widgets
+ * Class DocumentStatusIcon.
  */
 class DocumentStatusIcon extends DocumentStatus
 {
     public $statusCssClasses = [
         'verified' => 'green fa fa-check',
         'signed' => 'light-blue fa fa-certificate',
-        '*' => 'default'
+        '*' => 'default',
     ];
 
     public function run()

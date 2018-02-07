@@ -1,11 +1,10 @@
 <?php
 
 /**
- * @var hipanel\modules\document\models\Document $model
+ * @var hipanel\modules\document\models\Document
  * @var array $types
  * @var array $statuses
  */
-
 use hipanel\helpers\Url;
 use hipanel\modules\client\widgets\combo\ClientCombo;
 use hipanel\widgets\Box;
@@ -108,21 +107,20 @@ use yii\widgets\ActiveForm;
                 </div>
             </div>
         <?php endif; ?>
-        <?php if ($model->isNewRecord) {
-            echo $form->field($model, 'attachment')->widget(FileInput::class, [
+        <?php if ($model->isNewRecord) : ?>
+            <?= $form->field($model, 'attachment')->widget(FileInput::class, [
                 'pluginOptions' => [
                     'previewFileType' => 'any',
                     'showRemove' => true,
                     'showUpload' => false,
                     'initialPreviewShowDelete' => true,
                 ],
-            ]);
-        } ?>
+            ]) ?>
+        <?php endif ?>
 
         <?= Html::submitButton(Yii::t('hipanel', 'Save'), ['class' => 'btn btn-success']); ?>
 
-        <?= Html::submitButton(Yii::t('hipanel', 'Cancel'),
-            ['class' => 'btn btn-default', 'onclick' => 'window.history.back();']); ?>
+        <?= Html::submitButton(Yii::t('hipanel', 'Cancel'), ['class' => 'btn btn-default', 'onclick' => 'window.history.back();']); ?>
 
         <?php $form->end(); ?>
         <?php Box::end(); ?>

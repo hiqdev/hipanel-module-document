@@ -1,11 +1,11 @@
 <?php
 /**
- * Client module for HiPanel
+ * Documents module for HiPanel
  *
- * @link      https://github.com/hiqdev/hipanel-module-client
- * @package   hipanel-module-client
+ * @link      https://hipanel.com/
+ * @package   hipanel-module-document
  * @license   BSD-3-Clause
- * @copyright Copyright (c) 2015-2016, HiQDev (http://hiqdev.com/)
+ * @copyright Copyright (c) 2016-2018, HiQDev (http://hiqdev.com/)
  */
 
 namespace hipanel\modules\document\controllers;
@@ -21,8 +21,7 @@ use hipanel\filters\EasyAccessControl;
 use Yii;
 
 /**
- * Class DocumentController
- * @package hipanel\modules\document\controllers
+ * Class DocumentController.
  */
 class DocumentController extends CrudController
 {
@@ -84,7 +83,7 @@ class DocumentController extends CrudController
             ],
             'validate-single-form' => [
                 'class' => ValidateFormAction::class,
-                'validatedInputId' => false
+                'validatedInputId' => false,
             ],
         ]);
     }
@@ -94,7 +93,7 @@ class DocumentController extends CrudController
         return [
             'states' => $this->getStateData(),
             'types' => $this->getTypeData(),
-            'statuses' => $this->getStatusesData()
+            'statuses' => $this->getStatusesData(),
         ];
     }
 

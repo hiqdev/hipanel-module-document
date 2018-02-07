@@ -1,4 +1,12 @@
 <?php
+/**
+ * Documents module for HiPanel
+ *
+ * @link      https://hipanel.com/
+ * @package   hipanel-module-document
+ * @license   BSD-3-Clause
+ * @copyright Copyright (c) 2016-2018, HiQDev (http://hiqdev.com/)
+ */
 
 namespace hipanel\modules\document\widgets;
 
@@ -10,7 +18,7 @@ use yii\helpers\Html;
 class DocumentRelationWidget extends Widget
 {
     /**
-     * @var Object
+     * @var object
      */
     public $model;
 
@@ -36,7 +44,7 @@ class DocumentRelationWidget extends Widget
     protected function renderContactLink()
     {
         return Yii::t('hipanel:document', 'Contact: {link}', [
-            'link' => Html::a($this->model->name, ['@contact/view', 'id' => $this->model->id])
+            'link' => Html::a($this->model->name, ['@contact/view', 'id' => $this->model->id]),
         ]);
     }
 }

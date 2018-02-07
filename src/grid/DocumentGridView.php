@@ -1,37 +1,35 @@
 <?php
-
-/*
- * Client module for HiPanel
+/**
+ * Documents module for HiPanel
  *
- * @link      https://github.com/hiqdev/hipanel-module-client
- * @package   hipanel-module-client
+ * @link      https://hipanel.com/
+ * @package   hipanel-module-document
  * @license   BSD-3-Clause
- * @copyright Copyright (c) 2015-2016, HiQDev (http://hiqdev.com/)
+ * @copyright Copyright (c) 2016-2018, HiQDev (http://hiqdev.com/)
  */
 
 namespace hipanel\modules\document\grid;
 
-use hipanel\modules\document\widgets\DocumentRelationWidget;
-use hipanel\modules\document\widgets\DocumentStatuses;
-use hipanel\modules\document\widgets\DocumentStatusIcons;
-use hipanel\modules\document\widgets\DocumentType;
-use hipanel\modules\document\widgets\DocumentState;
-use hipanel\modules\document\widgets\ValidityWidget;
-use hiqdev\yii2\menus\grid\MenuColumn;
 use hipanel\grid\BoxedGridView;
 use hipanel\grid\RefColumn;
 use hipanel\modules\client\menus\ClientActionsMenu;
+use hipanel\modules\document\widgets\DocumentRelationWidget;
+use hipanel\modules\document\widgets\DocumentState;
+use hipanel\modules\document\widgets\DocumentStatuses;
+use hipanel\modules\document\widgets\DocumentStatusIcons;
+use hipanel\modules\document\widgets\DocumentType;
+use hipanel\modules\document\widgets\ValidityWidget;
+use hiqdev\yii2\menus\grid\MenuColumn;
 use Yii;
 use yii\helpers\Html;
 
 /**
- * Class DocumentGridView
- * @package hipanel\modules\document\grid
+ * Class DocumentGridView.
  */
 class DocumentGridView extends BoxedGridView
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function columns()
     {
@@ -111,8 +109,8 @@ class DocumentGridView extends BoxedGridView
                 'format' => 'raw',
                 'value' => function ($model) {
                     return DocumentState::widget(['model' => $model]) . ' ' . DocumentStatusIcons::widget(['model' => $model]);
-                }
-            ]
+                },
+            ],
         ]);
     }
 }

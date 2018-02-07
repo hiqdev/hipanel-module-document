@@ -1,12 +1,11 @@
 <?php
 
 /**
- * @var \hipanel\modules\document\models\Document $model
+ * @var \hipanel\modules\document\models\Document
  * @var \hipanel\modules\document\models\Document[] $models
  * @var array $types
  * @var array $states
  */
-
 use hipanel\modules\document\grid\DocumentGridView;
 use hipanel\modules\document\menus\DocumentDetailMenu;
 use hipanel\widgets\Box;

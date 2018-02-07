@@ -1,4 +1,12 @@
 <?php
+/**
+ * Documents module for HiPanel
+ *
+ * @link      https://hipanel.com/
+ * @package   hipanel-module-document
+ * @license   BSD-3-Clause
+ * @copyright Copyright (c) 2016-2018, HiQDev (http://hiqdev.com/)
+ */
 
 return [
     'Documents' => 'Документы',
@@ -49,5 +57,5 @@ return [
     'Document was updated' => 'Документ был изменён',
     'Document was created' => 'Документ был создан',
     'Document was deleted' => 'Документ был удалён',
-    'No documents found' => 'Документы отсутствуют'
+    'No documents found' => 'Документы отсутствуют',
 ];

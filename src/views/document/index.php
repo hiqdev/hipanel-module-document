@@ -5,14 +5,13 @@ use hipanel\widgets\IndexPage;
 use yii\helpers\Html;
 
 /**
- * @var \yii\data\ActiveDataProvider $dataProvider
+ * @var \yii\data\ActiveDataProvider
  * @var \hipanel\modules\document\models\Document $model
  * @var \hipanel\modules\document\models\Document[] $models
  * @var array $types
  * @var array $states
  * @var array $statuses
  */
-
 $this->title = Yii::t('hipanel:document', 'Documents');
 $this->params['subtitle'] = array_filter(Yii::$app->request->get($model->formName(), [])) ? Yii::t('hipanel', 'filtered list') : Yii::t('hipanel', 'full list');
 $this->params['breadcrumbs'][] = $this->title;
