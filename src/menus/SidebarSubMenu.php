@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Client module for HiPanel
  *
  * @link      https://github.com/hiqdev/hipanel-module-client
