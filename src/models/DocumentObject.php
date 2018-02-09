@@ -12,7 +12,7 @@ namespace hipanel\modules\document\models;
 
 use hipanel\base\ModelTrait;
 
-class Object extends \hipanel\base\Model
+class DocumentObject extends \hipanel\base\Model
 {
     use ModelTrait;
 

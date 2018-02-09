@@ -10,7 +10,7 @@
 
 namespace hipanel\modules\document\widgets;
 
-use hipanel\modules\document\models\Object;
+use hipanel\modules\document\models\DocumentObject;
 use Yii;
 use yii\base\Widget;
 use yii\helpers\Html;

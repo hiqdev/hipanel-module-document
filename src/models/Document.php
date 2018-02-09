@@ -116,7 +116,7 @@ class Document extends \hipanel\base\Model
 
     public function getObject()
     {
-        return $this->hasOne(Object::class, ['id' => 'object_id'])->via('file');
+        return $this->hasOne(DocumentObject::class, ['id' => 'object_id'])->via('file');
     }
 
     public function getStatuses()
