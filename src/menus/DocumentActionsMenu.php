@@ -49,7 +49,7 @@ class DocumentActionsMenu extends \hiqdev\yii2\menus\Menu
                 'label' => Yii::t('hipanel', 'Update'),
                 'icon' => 'fa-pencil',
                 'url' => ['@document/update', 'id' => $this->model->id],
-                'visible' => Yii::$app->user->can('document.manage') && $this->model->state !== 'deleted',
+                'visible' => Yii::$app->user->can('document.update') && $this->model->state !== 'deleted',
             ],
             'delete' => [
                 'label' => Yii::t('hipanel', 'Delete'),
@@ -63,7 +63,7 @@ class DocumentActionsMenu extends \hiqdev\yii2\menus\Menu
                     ],
                 ],
                 'encode' => false,
-                'visible' => Yii::$app->user->can('document.manage'),
+                'visible' => Yii::$app->user->can('document.delete'),
             ],
         ];
     }
