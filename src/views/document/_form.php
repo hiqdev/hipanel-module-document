@@ -50,7 +50,7 @@ use yii\widgets\ActiveForm;
         }
 
         echo $form->field($model, 'id')->hiddenInput()->label(false);
-        if (Yii::$app->user->can('document.manage')) {
+        if (Yii::$app->user->can('document.update')) {
             echo $form->field($model, 'client')->widget(ClientCombo::class, [
                 'inputOptions' => [
                     'readonly' => !$model->isNewRecord,
@@ -63,14 +63,14 @@ use yii\widgets\ActiveForm;
             'data' => $types,
             'hasId' => true,
         ]);
-        if (Yii::$app->user->can('document.manage')) {
+        if (Yii::$app->user->can('document.update')) {
             echo $form->field($model, 'status_types')->widget(StaticCombo::class, [
                 'data' => $statuses,
                 'hasId' => true,
                 'multiple' => true,
             ]);
         } ?>
-        <?php if (Yii::$app->user->can('document.manage')): ?>
+        <?php if (Yii::$app->user->can('document.update')): ?>
             <div class="row">
                 <div class="col-md-6">
                     <?php

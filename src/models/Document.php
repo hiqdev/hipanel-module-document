@@ -78,7 +78,7 @@ class Document extends \hipanel\base\Model
                 'safe',
                 'on' => ['create', 'update'],
                 'when' => function () {
-                    return Yii::$app->user->can('document.manage');
+                    return Yii::$app->user->can('document.update');
                 },
             ],
             [
@@ -89,7 +89,7 @@ class Document extends \hipanel\base\Model
                 'on' => ['create', 'update'],
                 'enableClientValidation' => false,
                 'when' => function () {
-                    return Yii::$app->user->can('document.manage');
+                    return Yii::$app->user->can('document.update');
                 },
             ],
             [['id'], 'required', 'on' => ['update', 'delete']],
