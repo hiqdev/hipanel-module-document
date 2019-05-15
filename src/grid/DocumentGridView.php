@@ -13,6 +13,7 @@ namespace hipanel\modules\document\grid;
 use hipanel\grid\BoxedGridView;
 use hipanel\grid\RefColumn;
 use hipanel\modules\client\menus\ClientActionsMenu;
+use hipanel\modules\document\models\Document;
 use hipanel\modules\document\widgets\DocumentRelationWidget;
 use hipanel\modules\document\widgets\DocumentState;
 use hipanel\modules\document\widgets\DocumentStatuses;
@@ -101,7 +102,7 @@ class DocumentGridView extends BoxedGridView
                 'filterAttribute' => 'sender_ilike',
                 'label' => Yii::t('hipanel:document', 'Sender'),
                 'format' => 'html',
-                'value' => function ($model) {
+                'value' => function (Document $model): string {
                     return Html::a($model->sender, ['@contact/view', 'id' => $model->sender_id]);
                 },
             ],
@@ -109,7 +110,7 @@ class DocumentGridView extends BoxedGridView
                 'filterAttribute' => 'receiver_ilike',
                 'label' => Yii::t('hipanel:document', 'Receiver'),
                 'format' => 'html',
-                'value' => function ($model) {
+                'value' => function (Document $model): string {
                     return Html::a($model->receiver, ['@contact/view', 'id' => $model->receiver_id]);
                 },
             ],
