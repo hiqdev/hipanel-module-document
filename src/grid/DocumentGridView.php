@@ -97,6 +97,22 @@ class DocumentGridView extends BoxedGridView
                     return DocumentStatuses::widget(['model' => $model]);
                 },
             ],
+            'sender' => [
+                'filterAttribute' => 'sender_ilike',
+                'label' => Yii::t('hipanel:document', 'Sender'),
+                'format' => 'html',
+                'value' => function ($model) {
+                    return Html::a($model->sender, ['@contact/view', 'id' => $model->sender_id]);
+                },
+            ],
+            'receiver' => [
+                'filterAttribute' => 'receiver_ilike',
+                'label' => Yii::t('hipanel:document', 'Receiver'),
+                'format' => 'html',
+                'value' => function ($model) {
+                    return Html::a($model->receiver, ['@contact/view', 'id' => $model->receiver_id]);
+                },
+            ],
             'object' => [
                 'label' => Yii::t('hipanel:document', 'Related object'),
                 'format' => 'raw',

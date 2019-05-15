@@ -67,12 +67,12 @@ class Document extends \hipanel\base\Model
             [['client', 'seller', 'title', 'description'], 'safe'],
             [['create_time', 'update_time'], 'safe'],
             [['type', 'state'], 'safe'],
-            [['filename'], 'string'],
+            [['filename', 'sender', 'receiver'], 'string'],
 
             [['client', 'attachment'], 'safe', 'on' => ['create']],
-            [['type', 'title'], 'required', 'on' => ['create', 'update']],
+            [['type', 'title', 'sender_id', 'receiver_id'], 'required', 'on' => ['create', 'update']],
             [['description', 'status_types'], 'safe', 'on' => ['create', 'update']],
-            [['file_id'], 'integer', 'on' => ['create', 'update']],
+            [['file_id', 'sender_id', 'receiver_id'], 'integer', 'on' => ['create', 'update']],
             [
                 ['validity_start', 'validity_end'],
                 'safe',
@@ -106,6 +106,8 @@ class Document extends \hipanel\base\Model
             'type_id' => Yii::t('hipanel', 'Type'),
             'attachment' => Yii::t('hipanel:document', 'File'),
             'status_types' => Yii::t('hipanel:document', 'Statuses'),
+            'sender_id' => Yii::t('hipanel:document', 'Sender'),
+            'receiver_id' => Yii::t('hipanel:document', 'Receiver'),
         ]);
     }
 

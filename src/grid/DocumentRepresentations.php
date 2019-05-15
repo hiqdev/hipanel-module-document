@@ -26,6 +26,8 @@ class DocumentRepresentations extends RepresentationCollection
                     'client_like',
                     'title',
                     'status_and_type',
+                    'sender',
+                    'receiver',
                     'object',
                     'create_time',
                 ],

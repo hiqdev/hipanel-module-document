@@ -5,25 +5,29 @@
  * @var array $types
  * @var array $statuses
  */
+
 use hipanel\helpers\Url;
 use hipanel\modules\client\widgets\combo\ClientCombo;
+use hipanel\modules\client\widgets\combo\ContactCombo;
+use hipanel\modules\document\models\Document;
 use hipanel\widgets\Box;
 use hipanel\widgets\DatePicker;
 use hipanel\widgets\FileInput;
+use hipanel\widgets\FileRender;
 use hiqdev\combo\StaticCombo;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 ?>
 
-<div>
+<div class="row">
     <?php if (!$model->isNewRecord): ?>
         <div class="col-md-3">
             <?php Box::begin([
                 'options' => ['class' => 'box-solid'],
             ]) ?>
             <div class="text-center">
-                <?= \hipanel\widgets\FileRender::widget([
+                <?= FileRender::widget([
                     'file' => $model->file,
                     'thumbWidth' => 200,
                     'thumbHeight' => 200,
@@ -45,7 +49,7 @@ use yii\widgets\ActiveForm;
             'options' => ['enctype' => 'multipart/form-data'],
         ]);
 
-        if ($model->scenario === \hipanel\modules\document\models\Document::SCENARIO_UPDATE) {
+        if ($model->scenario === Document::SCENARIO_UPDATE) {
             echo Html::activeHiddenInput($model, 'file_id');
         }
 
@@ -58,6 +62,16 @@ use yii\widgets\ActiveForm;
             ]);
         }
         echo $form->field($model, 'title');
+        ?>
+        <div class="row">
+            <div class="col-md-6">
+                <?= $form->field($model, 'sender_id')->widget(ContactCombo::class) ?>
+            </div>
+            <div class="col-md-6">
+                <?= $form->field($model, 'receiver_id')->widget(ContactCombo::class) ?>
+            </div>
+        </div>
+        <?php
         echo $form->field($model, 'description')->textarea(['rows' => 3]);
         echo $form->field($model, 'type')->widget(StaticCombo::class, [
             'data' => $types,
@@ -119,7 +133,7 @@ use yii\widgets\ActiveForm;
         <?php endif ?>
 
         <?= Html::submitButton(Yii::t('hipanel', 'Save'), ['class' => 'btn btn-success']); ?>
-
+        &nbsp;
         <?= Html::submitButton(Yii::t('hipanel', 'Cancel'), ['class' => 'btn btn-default', 'onclick' => 'window.history.back();']); ?>
 
         <?php $form->end(); ?>
