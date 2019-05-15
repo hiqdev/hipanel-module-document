@@ -58,4 +58,6 @@ return [
     'Document was created' => 'Документ был создан',
     'Document was deleted' => 'Документ был удалён',
     'No documents found' => 'Документы отсутствуют',
+    'Sender' => 'Отправитель',
+    'Receiver' => 'Получатель',
 ];
