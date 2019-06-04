@@ -142,6 +142,11 @@ class Document extends \hipanel\base\Model
 
     public function getDisplayTitle()
     {
-        return $this->title ?: Yii::t('hipanel:document', 'Untitled document');
+        $no = null;
+        if (!empty($this->data) && $this->data instanceof \paulzi\jsonBehavior\JsonField) {
+            $no = $this->data->offsetGet('no');
+        }
+        $title = $this->title ?? Yii::t('hipanel:document', 'Untitled document');
+        return $title . ($no ? " $no" : "");
     }
 }
