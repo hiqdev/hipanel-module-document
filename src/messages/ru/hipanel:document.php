@@ -28,6 +28,8 @@ return [
     'Nda' => 'Неразглашение',
     'Acceptance' => 'Акт',
     'Other' => 'Другое',
+    'Reserved' => 'Зарезервирован',
+    'Reserved document' => 'Зарезервированный документ',
     'Related object' => 'Связанный объект',
 
     'Contact: {link}' => 'Контакт: {link}',

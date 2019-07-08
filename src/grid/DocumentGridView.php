@@ -128,6 +128,14 @@ class DocumentGridView extends BoxedGridView
                     return DocumentState::widget(['model' => $model]) . ' ' . DocumentStatusIcons::widget(['model' => $model]);
                 },
             ],
+            'number' => [
+                'filterAttribute' => 'number_ilike',
+                'label' => Yii::t('hipanel:document', 'Number'),
+                'format' => 'raw',
+                'value' => function (Document $model): ?string {
+                    return $model->number;
+                },
+            ],
         ]);
     }
 }

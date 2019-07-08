@@ -67,7 +67,7 @@ class Document extends \hipanel\base\Model
             [['client', 'seller', 'title', 'description'], 'safe'],
             [['create_time', 'update_time'], 'safe'],
             [['type', 'state'], 'safe'],
-            [['filename', 'sender', 'receiver'], 'string'],
+            [['filename', 'sender', 'receiver', 'number'], 'string'],
 
             [['client', 'attachment'], 'safe', 'on' => ['create']],
             [['type', 'title', 'sender_id', 'receiver_id'], 'required', 'on' => ['create', 'update']],
