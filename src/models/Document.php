@@ -144,6 +144,6 @@ class Document extends \hipanel\base\Model
 
     public function getDisplayTitle()
     {
-        return $this->title ?: Yii::t('hipanel:document', 'Untitled document')
+        return $this->title ?: Yii::t('hipanel:document', 'Untitled document');
     }
 }
