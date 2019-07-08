@@ -149,6 +149,6 @@ class Document extends \hipanel\base\Model
             $no = $this->data->offsetGet('no');
         }
         $title = $this->title ?? Yii::t('hipanel:document', 'Untitled document');
-        return $title . ($no ? " $no" : "");
+        return $title;
     }
 }
