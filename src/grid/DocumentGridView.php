@@ -13,6 +13,7 @@ namespace hipanel\modules\document\grid;
 use hipanel\grid\BoxedGridView;
 use hipanel\grid\RefColumn;
 use hipanel\modules\client\menus\ClientActionsMenu;
+use hipanel\modules\document\models\Document;
 use hipanel\modules\document\widgets\DocumentRelationWidget;
 use hipanel\modules\document\widgets\DocumentState;
 use hipanel\modules\document\widgets\DocumentStatuses;
@@ -97,6 +98,22 @@ class DocumentGridView extends BoxedGridView
                     return DocumentStatuses::widget(['model' => $model]);
                 },
             ],
+            'sender' => [
+                'filterAttribute' => 'sender_ilike',
+                'label' => Yii::t('hipanel:document', 'Sender'),
+                'format' => 'html',
+                'value' => function (Document $model): string {
+                    return Html::a($model->sender, ['@contact/view', 'id' => $model->sender_id]);
+                },
+            ],
+            'receiver' => [
+                'filterAttribute' => 'receiver_ilike',
+                'label' => Yii::t('hipanel:document', 'Receiver'),
+                'format' => 'html',
+                'value' => function (Document $model): string {
+                    return Html::a($model->receiver, ['@contact/view', 'id' => $model->receiver_id]);
+                },
+            ],
             'object' => [
                 'label' => Yii::t('hipanel:document', 'Related object'),
                 'format' => 'raw',
@@ -109,6 +126,14 @@ class DocumentGridView extends BoxedGridView
                 'format' => 'raw',
                 'value' => function ($model) {
                     return DocumentState::widget(['model' => $model]) . ' ' . DocumentStatusIcons::widget(['model' => $model]);
+                },
+            ],
+            'number' => [
+                'filterAttribute' => 'number_ilike',
+                'label' => Yii::t('hipanel:document', 'Number'),
+                'format' => 'raw',
+                'value' => function (Document $model): ?string {
+                    return $model->number;
                 },
             ],
         ]);
