@@ -99,6 +99,7 @@ use yii\widgets\ActiveForm;
                     ])->widget(DateTimePicker::class, [
                         'clientOptions' => [
                             'format' => 'yyyy-mm-dd',
+                            'minView' => 2,
                             'todayHighlight' => true,
                         ],
                     ]);
@@ -114,6 +115,7 @@ use yii\widgets\ActiveForm;
                                 : null,
                         ],
                         'clientOptions' => [
+                            'minView' => 2,
                             'format' => 'yyyy-mm-dd',
                             'todayHighlight' => true,
                         ],
