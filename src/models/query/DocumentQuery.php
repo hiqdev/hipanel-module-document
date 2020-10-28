@@ -25,7 +25,7 @@ class DocumentQuery extends ActiveQuery
 
     public function showDeleted()
     {
-        return $this->andWhere(['state' => ['ok', 'outdated', 'deleted']]);
+        return $this->andWhere(['state_in' => ['ok', 'outdated', 'deleted']]);
     }
 
     public function id($id)
