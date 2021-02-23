@@ -18,6 +18,8 @@ use hipanel\actions\ValidateFormAction;
 use hipanel\actions\ViewAction;
 use hipanel\base\CrudController;
 use hipanel\filters\EasyAccessControl;
+use hipanel\modules\document\models\Document;
+use hiqdev\hiart\ResponseErrorException;
 use Yii;
 
 /**
@@ -120,5 +122,18 @@ class DocumentController extends CrudController
     public function getStatusesData()
     {
         return $this->getRefs('status,document', 'hipanel:document');
+    }
+
+    public function actionArchive()
+    {
+        $response = Yii::$app->response;
+        try {
+            $data = Document::perform('export', array_shift(Yii::$app->request->get()), ['batch' => true]);
+        } catch (ResponseErrorException $e) {
+            Yii::$app->getSession()->setFlash('error', Yii::t('hipanel:document', 'Error during creating archive'));
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+
+        $response->sendContentAsFile($data, 'archive.zip')->send();
     }
 }

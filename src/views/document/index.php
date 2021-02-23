@@ -3,6 +3,7 @@
 use hipanel\modules\document\grid\DocumentGridView;
 use hipanel\widgets\IndexPage;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /**
  * @var \yii\data\ActiveDataProvider
@@ -24,6 +25,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php $page->beginContent('main-actions') ?>
         <?= Html::a(Yii::t('hipanel:document', 'Create document'), 'create', ['class' => 'btn btn-sm btn-success']) ?>
+        <?= Html::a(Yii::t('hipanel:document', 'Archive document'), Url::to(array_merge(['archive'], Yii::$app->request->get())), [
+            'class' => 'btn btn-sm btn-success',
+            'disabled' => !array_filter(Yii::$app->request->get($model->formName(), [])),
+        ]) ?>
+        <?php if (array_filter(Yii::$app->request->get($model->formName(), []))) : ?>
+        <?php endif ?>
     <?php $page->endContent() ?>
 
     <?php $page->beginContent('sorter-actions') ?>
