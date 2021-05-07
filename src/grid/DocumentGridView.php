@@ -36,19 +36,19 @@ class DocumentGridView extends BoxedGridView
     {
         return array_merge(parent::columns(), [
             'title' => [
-                'format' => 'html',
+                'format' => 'raw',
                 'filterAttribute' => 'title_ilike',
                 'value' => function ($model) {
                     return implode(' ', [
                         DocumentType::widget(['model' => $model]),
-                        Html::a($model->getDisplayTitle(), ['@document/view', 'id' => $model->id]),
+                        Html::a(Html::encode($model->getDisplayTitle()), ['@document/view', 'id' => $model->id]),
                     ]);
                 },
             ],
             'state' => [
                 'class' => RefColumn::class,
                 'filterAttribute' => 'state_in',
-                'format' => 'html',
+                'format' => 'raw',
                 'gtype' => 'state,document',
                 'i18nDictionary' => 'hipanel:document',
                 'value' => function ($model) {
@@ -58,7 +58,7 @@ class DocumentGridView extends BoxedGridView
             'type' => [
                 'class' => RefColumn::class,
                 'filterAttribute' => 'type_in',
-                'format' => 'html',
+                'format' => 'raw',
                 'gtype' => 'type,document',
                 'i18nDictionary' => 'hipanel:document',
                 'value' => function ($model) {
@@ -86,14 +86,14 @@ class DocumentGridView extends BoxedGridView
             ],
             'validity' => [
                 'label' => Yii::t('hipanel:document', 'Validity'),
-                'format' => 'html',
+                'format' => 'raw',
                 'value' => function ($model) {
                     return ValidityWidget::widget(['model' => $model]);
                 },
             ],
             'statuses' => [
                 'label' => Yii::t('hipanel:document', 'Statuses'),
-                'format' => 'html',
+                'format' => 'raw',
                 'value' => function ($model) {
                     return DocumentStatuses::widget(['model' => $model]);
                 },
@@ -101,29 +101,29 @@ class DocumentGridView extends BoxedGridView
             'sender' => [
                 'filterAttribute' => 'sender_ilike',
                 'label' => Yii::t('hipanel:document', 'Sender'),
-                'format' => 'html',
+                'format' => 'raw',
                 'value' => function (Document $model): string {
-                    return Html::a($model->sender, ['@contact/view', 'id' => $model->sender_id]);
+                    return Html::a(Html::encode($model->sender), ['@contact/view', 'id' => $model->sender_id]);
                 },
             ],
             'receiver' => [
                 'filterAttribute' => 'receiver_ilike',
                 'label' => Yii::t('hipanel:document', 'Receiver'),
-                'format' => 'html',
+                'format' => 'raw',
                 'value' => function (Document $model): string {
-                    return Html::a($model->receiver, ['@contact/view', 'id' => $model->receiver_id]);
+                    return Html::a(Html::encode($model->receiver), ['@contact/view', 'id' => $model->receiver_id]);
                 },
             ],
             'object' => [
                 'label' => Yii::t('hipanel:document', 'Related object'),
-                'format' => 'html',
+                'format' => 'raw',
                 'value' => function ($model) {
                     return DocumentRelationWidget::widget(['model' => $model->object]);
                 },
             ],
             'status_and_type' => [
                 'label' => Yii::t('hipanel:document', 'Statuses'),
-                'format' => 'html',
+                'format' => 'raw',
                 'value' => function ($model) {
                     return DocumentState::widget(['model' => $model]) . ' ' . DocumentStatusIcons::widget(['model' => $model]);
                 },
@@ -131,9 +131,7 @@ class DocumentGridView extends BoxedGridView
             'number' => [
                 'filterAttribute' => 'number_ilike',
                 'label' => Yii::t('hipanel:document', 'Number'),
-                'value' => function (Document $model): ?string {
-                    return $model->number;
-                },
+                'attribute' => 'number',
             ],
         ]);
     }

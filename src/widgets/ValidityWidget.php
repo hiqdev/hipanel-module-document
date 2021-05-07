@@ -13,6 +13,7 @@ namespace hipanel\modules\document\widgets;
 use hipanel\modules\document\models\Document;
 use Yii;
 use yii\base\Widget;
+use yii\helpers\Html;
 
 class ValidityWidget extends Widget
 {
@@ -33,12 +34,12 @@ class ValidityWidget extends Widget
 
     protected function getStart()
     {
-        return $this->model->{$this->start_attribute};
+        return Html::encode($this->model->{$this->start_attribute});
     }
 
     protected function getEnd()
     {
-        return $this->model->{$this->end_attribute};
+        return Html::encode($this->model->{$this->end_attribute});
     }
 
     public function run()
