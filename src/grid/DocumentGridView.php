@@ -39,7 +39,7 @@ class DocumentGridView extends BoxedGridView
                 'format' => 'raw',
                 'filterAttribute' => 'title_ilike',
                 'value' => function ($model) {
-                    $title = Html::a($model->getDisplayTitle(), ['@document/view', 'id' => $model->id]);
+                    $title = Html::a(Html::encode($model->getDisplayTitle()), ['@document/view', 'id' => $model->id]);
                     $types = DocumentType::widget(['model' => $model]);
                     return Html::tag('span', $title . $types, ['style' => 'display: flex; justify-content: space-between;']);
                 },
@@ -100,17 +100,17 @@ class DocumentGridView extends BoxedGridView
             'sender' => [
                 'filterAttribute' => 'sender_ilike',
                 'label' => Yii::t('hipanel:document', 'Sender'),
-                'format' => 'html',
+                'format' => 'raw',
                 'value' => function (Document $model): string {
-                    return Html::a($model->sender, ['@contact/view', 'id' => $model->sender_id]);
+                    return Html::a(Html::encode($model->sender), ['@contact/view', 'id' => $model->sender_id]);
                 },
             ],
             'receiver' => [
                 'filterAttribute' => 'receiver_ilike',
                 'label' => Yii::t('hipanel:document', 'Receiver'),
-                'format' => 'html',
+                'format' => 'raw',
                 'value' => function (Document $model): string {
-                    return Html::a($model->receiver, ['@contact/view', 'id' => $model->receiver_id]);
+                    return Html::a(Html::encode($model->receiver), ['@contact/view', 'id' => $model->receiver_id]);
                 },
             ],
             'object' => [
@@ -138,10 +138,7 @@ class DocumentGridView extends BoxedGridView
             'number' => [
                 'filterAttribute' => 'number_ilike',
                 'label' => Yii::t('hipanel:document', 'Number'),
-                'format' => 'raw',
-                'value' => function (Document $model): ?string {
-                    return $model->number;
-                },
+                'attribute' => 'number',
             ],
             'number_and_time' => [
                 'filterAttribute' => 'number_ilike',

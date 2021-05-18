@@ -126,7 +126,7 @@ CSS
                                         <?= DocumentStatusIcons::widget(['model' => $document]) ?>
                                     </div>
                                     <?php
-                                    $title = StringHelper::truncate($document->getDisplayTitle(), 15);
+                                    $title = Html::encode(StringHelper::truncate($document->getDisplayTitle(), 15));
                                     echo Html::a($title, ['@document/view', 'id' => $document->id]);
                                     ?>
                                     <div class="text-muted text-sm text-ecliellipsis"><?= Yii::$app->formatter->asDate($document->create_time) ?></div>

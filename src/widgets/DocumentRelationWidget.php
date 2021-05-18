@@ -44,7 +44,7 @@ class DocumentRelationWidget extends Widget
     protected function renderContactLink()
     {
         return Yii::t('hipanel:document', 'Contact: {link}', [
-            'link' => Html::a($this->model->name, ['@contact/view', 'id' => $this->model->id]),
+            'link' => Html::a(Html::encode($this->model->name), ['@contact/view', 'id' => $this->model->id]),
         ]);
     }
 }
