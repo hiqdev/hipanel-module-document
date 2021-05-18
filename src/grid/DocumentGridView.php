@@ -39,10 +39,9 @@ class DocumentGridView extends BoxedGridView
                 'format' => 'raw',
                 'filterAttribute' => 'title_ilike',
                 'value' => function ($model) {
-                    return implode(' ', [
-                        DocumentType::widget(['model' => $model]),
-                        Html::a(Html::encode($model->getDisplayTitle()), ['@document/view', 'id' => $model->id]),
-                    ]);
+                    $title = Html::a(Html::encode($model->getDisplayTitle()), ['@document/view', 'id' => $model->id]);
+                    $types = DocumentType::widget(['model' => $model]);
+                    return Html::tag('span', $title . $types, ['style' => 'display: flex; justify-content: space-between;']);
                 },
             ],
             'state' => [
@@ -121,6 +120,14 @@ class DocumentGridView extends BoxedGridView
                     return DocumentRelationWidget::widget(['model' => $model->object]);
                 },
             ],
+            'status' => [
+                'label' => Yii::t('hipanel:document', 'Statuses'),
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return DocumentState::widget(['model' => $model]) . ' ' . DocumentStatusIcons::widget(['model' => $model]);
+                },
+            ],
+            // XXX don't know why it is called `and_type`
             'status_and_type' => [
                 'label' => Yii::t('hipanel:document', 'Statuses'),
                 'format' => 'raw',
@@ -132,6 +139,16 @@ class DocumentGridView extends BoxedGridView
                 'filterAttribute' => 'number_ilike',
                 'label' => Yii::t('hipanel:document', 'Number'),
                 'attribute' => 'number',
+            ],
+            'number_and_time' => [
+                'filterAttribute' => 'number_ilike',
+                'sortAttribute' => 'number',
+                'label' => Yii::t('hipanel:document', 'Number'),
+                'format' => 'raw',
+                'value' => function (Document $model): ?string {
+                    return Html::tag('b', $model->number, ['style' => 'white-space:nowrap']) . '<br/>' .
+                            Yii::$app->formatter->asDatetime($model->create_time);
+                },
             ],
         ]);
     }
