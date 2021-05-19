@@ -70,7 +70,13 @@ class Document extends \hipanel\base\Model
             [['filename', 'sender', 'receiver', 'number'], 'string'],
 
             [['client', 'attachment'], 'safe', 'on' => ['create']],
-            [['type', 'title', 'sender_id', 'receiver_id'], 'required', 'on' => ['create', 'update']],
+            [
+                ['type', 'title', 'sender_id', 'receiver_id'], 'required',
+                'on' => ['create', 'update'],
+                'when' => function () {
+                    return Yii::$app->user->can('support');
+                },
+            ],
             [['description', 'status_types'], 'safe', 'on' => ['create', 'update']],
             [['file_id', 'sender_id', 'receiver_id'], 'integer', 'on' => ['create', 'update']],
             [
