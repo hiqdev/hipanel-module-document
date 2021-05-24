@@ -41,7 +41,7 @@ class DocumentGridView extends BoxedGridView
                 'value' => function ($model) {
                     $title = Html::a(Html::encode($model->getDisplayTitle()), ['@document/view', 'id' => $model->id]);
                     $types = DocumentType::widget(['model' => $model]);
-                    return Html::tag('span', $title . $types, ['style' => 'display: flex; justify-content: space-between;']);
+                    return Html::tag('span', "<span>$title</span><span>$types</span>", ['style' => 'display: flex; justify-content: space-between;']);
                 },
             ],
             'state' => [
