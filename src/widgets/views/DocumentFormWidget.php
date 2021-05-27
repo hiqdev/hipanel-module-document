@@ -1,10 +1,11 @@
 <?php
 
 /**
- * @var hipanel\modules\document\models\Document
+ * @var hipanel\modules\document\models\Document $model
  * @var array $types
  * @var array $statuses
  * @var array $states
+ * @var string $boxWidth
  */
 
 use hipanel\helpers\Url;
@@ -12,6 +13,7 @@ use hipanel\modules\client\widgets\combo\ClientCombo;
 use hipanel\modules\client\widgets\combo\ContactCombo;
 use hipanel\modules\document\models\Document;
 use hipanel\widgets\Box;
+use hipanel\widgets\combo\ObjectCombo;
 use hipanel\widgets\DateTimePicker;
 use hipanel\widgets\FileInput;
 use hipanel\widgets\FileRender;
@@ -82,6 +84,9 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'type')->widget(StaticCombo::class, [
             'data' => $types,
             'hasId' => true,
+        ]) ?>
+        <?= $form->field($model, 'object_id')->widget(ObjectCombo::class, [
+            'class_attribute_name' => 'class',
         ]) ?>
     <?php endif ?>
     <?php if (Yii::$app->user->can('document.update')): ?>
