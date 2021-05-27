@@ -13,7 +13,9 @@ namespace hipanel\modules\document\models;
 use hipanel\base\ModelTrait;
 use hipanel\behaviors\File as FileBehavior;
 use hipanel\models\File;
+use hipanel\modules\client\models\Contact;
 use hipanel\modules\document\models\query\DocumentQuery;
+use hiqdev\hiart\ResponseErrorException;
 use paulzi\jsonBehavior\JsonBehavior;
 use paulzi\jsonBehavior\JsonValidator;
 use Yii;
@@ -64,9 +66,9 @@ class Document extends \hipanel\base\Model
     {
         return [
             [['id', 'type_id', 'state_id', 'object_id', 'client_id', 'seller_id'], 'integer'],
-            [['client', 'seller', 'title', 'description'], 'safe'],
+            [['client', 'seller', 'title', 'description', 'class'], 'safe'],
             [['create_time', 'update_time'], 'safe'],
-            [['type', 'state'], 'safe'],
+            [['type', 'state', 'object_id'], 'safe'],
             [['filename', 'sender', 'receiver', 'number'], 'string'],
 
             [['client', 'attachment'], 'safe', 'on' => ['create']],
