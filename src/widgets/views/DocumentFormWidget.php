@@ -12,6 +12,7 @@ use hipanel\helpers\Url;
 use hipanel\modules\client\widgets\combo\ClientCombo;
 use hipanel\modules\client\widgets\combo\ContactCombo;
 use hipanel\modules\document\models\Document;
+use hipanel\modules\document\widgets\combo\ContactIndependentCombo;
 use hipanel\widgets\Box;
 use hipanel\widgets\combo\ObjectCombo;
 use hipanel\widgets\DateTimePicker;
@@ -58,9 +59,11 @@ use yii\widgets\ActiveForm;
         <?= Html::activeHiddenInput($model, 'file_id') ?>
     <?php endif ?>
 
-    <?= $form->field($model, 'id')->hiddenInput()->label(false) ?>
+    <?= Html::activeHiddenInput($model, 'id') ?>
+
     <?php if (Yii::$app->user->can('document.update')): ?>
         <?= $form->field($model, 'client')->widget(ClientCombo::class, [
+            'type' => 'main/client',
             'inputOptions' => [
                 'readonly' => !$model->isNewRecord,
             ],
@@ -70,10 +73,10 @@ use yii\widgets\ActiveForm;
     <?php if (Yii::$app->user->can('support')): ?>
         <div class="row">
             <div class="col-md-6">
-                <?= $form->field($model, 'sender_id')->widget(ContactCombo::class) ?>
+                <?= $form->field($model, 'sender_id')->widget(ContactIndependentCombo::class, ['type' => 'sender/contact']) ?>
             </div>
             <div class="col-md-6">
-                <?= $form->field($model, 'receiver_id')->widget(ContactCombo::class) ?>
+                <?= $form->field($model, 'receiver_id')->widget(ContactIndependentCombo::class, ['type' => 'receiver/contact']) ?>
             </div>
         </div>
     <?php else : ?>
