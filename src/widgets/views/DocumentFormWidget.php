@@ -10,7 +10,7 @@
 
 use hipanel\helpers\Url;
 use hipanel\modules\client\widgets\combo\ClientCombo;
-use hipanel\modules\client\widgets\combo\ContactCombo;
+use hipanel\modules\finance\widgets\combo\RequisitesCombo;
 use hipanel\modules\document\models\Document;
 use hipanel\modules\document\widgets\combo\ContactIndependentCombo;
 use hipanel\widgets\Box;
@@ -91,6 +91,9 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'object_id')->widget(ObjectCombo::class, [
             'class_attribute_name' => 'class',
         ]) ?>
+    <?php endif ?>
+    <?php if (Yii::$app->user->can('requisites.read')): ?>
+        <?= $form->field($model, 'requisite_id')->widget(RequisitesCombo::class) ?>
     <?php endif ?>
     <?php if (Yii::$app->user->can('document.update')): ?>
         <?= $form->field($model, 'status_types')->widget(StaticCombo::class, [

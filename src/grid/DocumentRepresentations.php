@@ -29,6 +29,7 @@ class DocumentRepresentations extends RepresentationCollection
                     'status',
                     'sender',
                     'receiver',
+                    'requisite',
                     'object',
                 ],
             ],

@@ -113,6 +113,12 @@ class DocumentGridView extends BoxedGridView
                     return Html::a(Html::encode($model->receiver), ['@contact/view', 'id' => $model->receiver_id]);
                 },
             ],
+            'requisite' => [
+                'format' => 'raw',
+                'value' => function (Document $model): string {
+                    return Html::a(Html::encode($model->requisite), ['@requisite/view', 'id' => $model->requisite_id]);
+                },
+            ],
             'object' => [
                 'label' => Yii::t('hipanel:document', 'Related object'),
                 'format' => 'raw',

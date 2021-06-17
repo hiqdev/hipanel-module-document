@@ -68,7 +68,7 @@ class Document extends \hipanel\base\Model
             [['id', 'type_id', 'state_id', 'object_id', 'client_id', 'seller_id'], 'integer'],
             [['client', 'seller', 'title', 'description', 'class'], 'safe'],
             [['create_time', 'update_time'], 'safe'],
-            [['type', 'state', 'object_id'], 'safe'],
+            [['type', 'state', 'object_id', 'requisite_id', 'requisite'], 'safe'],
             [['filename', 'sender', 'receiver', 'number'], 'string'],
 
             [['client', 'attachment'], 'safe', 'on' => ['create']],
@@ -116,6 +116,8 @@ class Document extends \hipanel\base\Model
             'status_types' => Yii::t('hipanel:document', 'Statuses'),
             'sender_id' => Yii::t('hipanel:document', 'Sender'),
             'receiver_id' => Yii::t('hipanel:document', 'Receiver'),
+            'requisite_id' => Yii::t('hipanel:finance', 'Requisite'),
+            'requisite' => Yii::t('hipanel:finance', 'Requisite'),
         ]);
     }
 
