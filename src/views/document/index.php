@@ -24,13 +24,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $page->setSearchFormData(compact(['types', 'states', 'statuses'])) ?>
 
     <?php $page->beginContent('main-actions') ?>
+        <?php $couldGetArchive = array_filter(Yii::$app->request->get($model->formName(), [])) ?>
         <?= Html::a(Yii::t('hipanel:document', 'Create document'), 'create', ['class' => 'btn btn-sm btn-success']) ?>
-        <?= Html::a(Yii::t('hipanel:document', 'Archive document'), Url::to(array_merge(['archive'], Yii::$app->request->get())), [
+        <?= Html::a(Yii::t('hipanel:document', 'Get documents as compressed file'), Url::to(array_merge(['archive'], Yii::$app->request->get())), array_filter([
             'class' => 'btn btn-sm btn-success',
-            'disabled' => !array_filter(Yii::$app->request->get($model->formName(), [])),
-        ]) ?>
-        <?php if (array_filter(Yii::$app->request->get($model->formName(), []))) : ?>
-        <?php endif ?>
+            'disabled' => !$couldGetArchive,
+            'onClick' => !$couldGetArchive ? "return false;" : null,
+        ])) ?>
     <?php $page->endContent() ?>
 
     <?php $page->beginContent('sorter-actions') ?>

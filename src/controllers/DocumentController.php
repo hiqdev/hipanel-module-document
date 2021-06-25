@@ -127,6 +127,10 @@ class DocumentController extends CrudController
     public function actionArchive()
     {
         $response = Yii::$app->response;
+        if (empty(Yii::$app->request->get())) {
+            Yii::$app->getSession()->setFlash('error', Yii::t('hipanel:document', 'Filter document first'));
+            return $this->redirect(Yii::$app->request->referrer);
+        }
         try {
             $data = Document::perform('export', array_shift(Yii::$app->request->get()), ['batch' => true]);
         } catch (ResponseErrorException $e) {

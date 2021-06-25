@@ -62,4 +62,6 @@ return [
     'No documents found' => 'Документы отсутствуют',
     'Sender' => 'Отправитель',
     'Receiver' => 'Получатель',
+    'Get documents as compressed file' => 'Получить документы в виде архива',
+    'Filter documents first' => 'Отфильтруйте документы сначала',
 ];
