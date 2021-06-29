@@ -31,7 +31,7 @@ return [
         'definitions' => [
             \hiqdev\thememanager\menus\AbstractSidebarMenu::class => [
                 'add' => [
-                    'client' => [
+                    'clients' => [
                         'menu' => [
                             'merge' => [
                                 'document' => [
