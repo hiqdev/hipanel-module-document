@@ -46,9 +46,9 @@
     ],
     "require": {
         "yiisoft/yii2": "^2.0",
-        "hiqdev/hipanel-core": "<2.0 || dev-master",
-        "hiqdev/hipanel-module-client": "dev-master",
-        "hiqdev/hipanel-module-finance": "dev-master",
+        "hiqdev/hipanel-core": "<2.0 || dev-php8",
+        "hiqdev/hipanel-module-client": "dev-php8",
+        "hiqdev/hipanel-module-finance": "dev-php8",
         "paulzi/yii2-json-behavior": "^1.0"
     },
     "require-dev": {
