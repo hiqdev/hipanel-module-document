@@ -27,6 +27,11 @@ class SidebarSubMenu extends \hiqdev\yii2\menus\Menu
                         'url' => ['/document/document/index'],
                         'visible' => Yii::$app->user->can('document.read'),
                     ],
+                    'mail-out' => [
+                        'label' => Yii::t('hipanel.document.mailout', 'Mail-out'),
+                        'url' => ['@mail-out/index'],
+                        'visible' => Yii::$app->user->can('document.update'),
+                    ],
                 ],
             ],
         ];
