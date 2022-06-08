@@ -7,19 +7,24 @@ Vue.createApp({
   data() {
     return {
       mailOut: {
-        recipients: '',
-        balance: '',
-        type: '',
-        from: '',
-        subject: '',
-        message: '',
-        attach: '0',
-        direct_only: '0',
+        recipients: "",
+        balance: "",
+        type: "",
+        from: "",
+        subject: "",
+        message: "",
+        attach: "0",
+        direct_only: "0",
       },
-      previews: [],
+      previews: {},
       collapsed: false,
       isLoading: false,
     };
+  },
+  computed: {
+    recipients() {
+      return this.mailOut.recipients.split(/\r?\n/);
+    },
   },
   methods: {
     prepareMailOut(event) {
@@ -27,6 +32,7 @@ Vue.createApp({
       if (this.collapsed === false && $(event.target).find(".has-error").length === 0) {
         this.makeRequest($(event.target).yiiActiveForm("data").options.action, this.mailOut, (response) => {
           this.collapse(event);
+          this.previews = {};
           this.mailOut.recipients = response.data.recipients;
         });
       }
@@ -37,7 +43,7 @@ Vue.createApp({
       event.preventDefault();
       if (confirm(event.target.dataset.confirmMessage)) {
         this.makeRequest($(event.target).yiiActiveForm("data").options.action, this.mailOut, () => {
-          this.mailOut.recipients = '';
+          this.mailOut.recipients = "";
           this.expand();
           this.resetPrepareForm();
           hipanel.notify.success(event.target.dataset.successMessage);
@@ -46,12 +52,13 @@ Vue.createApp({
 
       return false;
     },
-    showPreview(event) {
-      this.makeRequest($("#show-preview-mail-out").data("action"), this.mailOut, (response) => {
-        this.showModal();
-        this.previews = [];
+    showPreviewFor(event, recipient) {
+      const btn = $(event.target).button("loading");
+      const payload = Object.assign({}, this.mailOut);
+      payload.recipients = recipient;
+      this.makeRequest($("#show-preview-mail-out").data("action"), payload, (response) => {
         for (const [login, data] of Object.entries(response.data)) {
-          this.previews.push(data);
+          this.previews[login] = data;
         }
       });
     },
@@ -60,7 +67,7 @@ Vue.createApp({
     },
     expand() {
       this.collapsed = false;
-      this.mailOut.recipients = '';
+      this.mailOut.recipients = "";
     },
     showModal() {
       this.$nextTick(() => {
@@ -68,19 +75,22 @@ Vue.createApp({
       });
     },
     resetPrepareForm() {
-      this.mailOut.balance = 'any';
-      this.mailOut.type = 'invoice';
-      this.mailOut.attach = '0';
-      this.mailOut.direct_only = '0';
-      this.mailOut.from = '';
-      this.mailOut.subject = '';
-      this.mailOut.message = '';
+      this.mailOut.balance = "any";
+      this.mailOut.type = "invoice";
+      this.mailOut.attach = "0";
+      this.mailOut.direct_only = "0";
+      this.mailOut.from = "";
+      this.mailOut.subject = "";
+      this.mailOut.message = "";
     },
     makeRequest(url, data, callback) {
       $.ajax({
         url: url,
+        method: 'POST',
+        timeout: 999999,
         type: "post",
         dataType: "json",
+        cache: false,
         data: data,
         beforeSend: () => {
           this.isLoading = true;

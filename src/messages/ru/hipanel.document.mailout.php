@@ -23,4 +23,6 @@ return [
     'Recipients' => 'Получатели',
     'Type of attachments' => 'Тип прикреплений',
     'Direct clients only' => 'Только прямые клиенты',
+    'Loading preview...' => 'Загружаю...',
+    'Show preview' => 'Показать письмо',
 ];

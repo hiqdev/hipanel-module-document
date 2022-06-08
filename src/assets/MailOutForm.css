@@ -32,15 +32,30 @@
     display: none;
 }
 
-.emails-box .email-box {
+.modal-title > span {
+    font-size: x-small;
+    color: #777777;
+}
+
+.emails-box .email-box > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     padding: 8px 15px;
     border-bottom: 1px solid #eee;
 }
 
+.emails-box .email-box div > h6 {
+    font-weight: bold;
+}
+
 .emails-box .email-box p {
     display: block;
+    padding: 8px 15px;
+    border-bottom: 1px solid #eee;
     unicode-bidi: embed;
     font-family: monospace;
     white-space: pre;
     font-size: smaller;
+    margin: 0;
 }

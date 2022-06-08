@@ -27,11 +27,23 @@ $this->params['breadcrumbs'][] = $this->title;
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title"><?= Yii::t('hipanel.document.mailout', 'Emails preview') ?></h4>
+                    <h4 class="modal-title"><?= Yii::t('hipanel.document.mailout', 'Emails preview') ?> <span>{{ Object.keys(recipients).length }}</span></h4>
                 </div>
                 <div class="modal-body no-padding emails-box">
-                    <div class="email-box" v-for="preview in previews">
-                        <p style="margin-top: 10px">{{ preview.preview }}</p>
+                    <div class="email-box" v-for="recipient in recipients">
+                        <p v-if="recipient.split(':')[0] in previews">
+                            {{ previews[recipient.split(':')[0]].preview }}
+                        </p>
+                        <div v-else>
+                            <h6>{{ recipient }}</h6>
+                            <button type="button"
+                                    class="btn btn-default"
+                                    data-loading-text="<?= Yii::t('hipanel.document.mailout', 'Loading preview...') ?>"
+                                    @click="event => showPreviewFor(event, recipient)"
+                            >
+                                <?= Yii::t('hipanel.document.mailout', 'Show preview') ?>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -140,7 +152,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::activeHiddenInput($sendMailOutForm, 'message', ['v-model' => 'mailOut.message']) ?>
                 </div>
                 <div class="box-footer">
-                    <button type="button" class="btn btn-default pull-left" @click="showPreview">
+                    <button type="button" class="btn btn-default pull-left" @click="showModal">
                         <i class="fa fa-eye fa-fw"></i>
                         <?= Yii::t('hipanel.document.mailout', 'Emails preview') ?>
                     </button>&nbsp;
