@@ -87,7 +87,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'documents' => 'Links to attachments',
                                                 'balances' => 'Balances',
                                                 'debts' => 'Debts',
-                                                'preovers' => 'Previous month overuses',
+                                                'prevovers' => 'Previous month overuses',
                                                ] as $key => $label) : ?>
                                     <strong>{<?= $key ?>}</strong> - <?= $label ?><br>
                                 <?php endforeach ?>
