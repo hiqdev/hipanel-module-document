@@ -151,7 +151,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::activeHiddenInput($sendMailOutForm, 'subject', ['v-model' => 'mailOut.subject']) ?>
                     <?= Html::activeHiddenInput($sendMailOutForm, 'message', ['v-model' => 'mailOut.message']) ?>
                 </div>
-                <div class="box-footer">
+                <div class="box-footer" v-if="recipients.length > 0">
                     <button type="button" class="btn btn-default pull-left" @click="showModal">
                         <i class="fa fa-eye fa-fw"></i>
                         <?= Yii::t('hipanel.document.mailout', 'Emails preview') ?>

@@ -23,7 +23,7 @@ Vue.createApp({
   },
   computed: {
     recipients() {
-      return this.mailOut.recipients.split(/\r?\n/);
+      return this.mailOut.recipients.split(/\r?\n/).filter(line => line !== null && line !== "");
     },
   },
   methods: {
@@ -60,6 +60,8 @@ Vue.createApp({
         for (const [login, data] of Object.entries(response.data)) {
           this.previews[login] = data;
         }
+      }, () => {
+        btn.button("reset");
       });
     },
     collapse() {
@@ -83,32 +85,39 @@ Vue.createApp({
       this.mailOut.subject = "";
       this.mailOut.message = "";
     },
-    makeRequest(url, data, callback) {
+    makeRequest(url, data, done, always) {
       $.ajax({
-        url: url,
-        method: 'POST',
-        timeout: 999999,
-        type: "post",
-        dataType: "json",
-        cache: false,
-        data: data,
-        beforeSend: () => {
-          this.isLoading = true;
-        },
-        complete: () => {
-          this.isLoading = false;
-        },
-      }).done(function (response) {
-        if (response.errorMessage) {
-          hipanel.notify.error(response.errorMessage);
-        } else {
-          if (typeof callback === "function") {
-            callback(response);
+          url: url,
+          method: "POST",
+          timeout: 999999,
+          type: "post",
+          dataType: "json",
+          cache: false,
+          data: data,
+          beforeSend: () => {
+            this.isLoading = true;
+          },
+          complete: () => {
+            this.isLoading = false;
+          },
+        })
+        .always(function () {
+          if (typeof always === "function") {
+            always();
           }
-        }
-      }).fail(function () {
-        console.log("error");
-      });
+        })
+        .done(function (response) {
+          if (response.errorMessage) {
+            hipanel.notify.error(response.errorMessage);
+          } else {
+            if (typeof done === "function") {
+              done(response);
+            }
+          }
+        })
+        .fail(function (jqXHR, textStatus) {
+          console.log(textStatus);
+        });
     },
   },
 }).mount("#mail-out-app");
