@@ -11,6 +11,7 @@
 return [
     'aliases' => [
         '@document' => '/document/document',
+        '@mail-out' => '/document/mail-out',
     ],
     'modules' => [
         'document' => [
@@ -21,6 +22,10 @@ return [
         'i18n' => [
             'translations' => [
                 'hipanel:document' => [
+                    'class' => \yii\i18n\PhpMessageSource::class,
+                    'basePath' => dirname(__DIR__) . '/src/messages',
+                ],
+                'hipanel.document.mailout' => [
                     'class' => \yii\i18n\PhpMessageSource::class,
                     'basePath' => dirname(__DIR__) . '/src/messages',
                 ],
@@ -38,6 +43,12 @@ return [
                                     'menu' => \hipanel\modules\document\menus\SidebarSubMenu::class,
                                     'where' => [
                                         'after' => ['contacts'],
+                                    ],
+                                ],
+                                'mail-out' => [
+                                    'menu' => \hipanel\modules\document\menus\SidebarSubMenu::class,
+                                    'where' => [
+                                        'after' => ['debts'],
                                     ],
                                 ],
                             ],
