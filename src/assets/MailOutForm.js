@@ -72,6 +72,7 @@ Vue.createApp({
       this.mailOut.recipients = "";
     },
     showModal() {
+      this.previews = {};
       this.$nextTick(() => {
         $("#show-preview-mail-out").modal("show");
       });
