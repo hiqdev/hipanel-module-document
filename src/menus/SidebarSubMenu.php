@@ -24,12 +24,12 @@ class SidebarSubMenu extends \hiqdev\yii2\menus\Menu
                 'items' => [
                     'documents' => [
                         'label' => Yii::t('hipanel:document', 'Documents'),
-                        'url' => ['/document/document/index'],
+                        'url' => '@document/index',
                         'visible' => Yii::$app->user->can('document.read'),
                     ],
                     'mail-out' => [
                         'label' => Yii::t('hipanel.document.mailout', 'Mail-out'),
-                        'url' => ['@mail-out/index'],
+                        'url' => '@mail-out/index',
                         'visible' => Yii::$app->user->can('document.update'),
                     ],
                 ],
