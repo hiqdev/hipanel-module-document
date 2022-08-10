@@ -13,11 +13,9 @@ namespace hipanel\modules\document\models;
 use hipanel\base\ModelTrait;
 use hipanel\behaviors\File as FileBehavior;
 use hipanel\models\File;
-use hipanel\modules\client\models\Contact;
 use hipanel\modules\document\models\query\DocumentQuery;
-use hiqdev\hiart\ResponseErrorException;
-use paulzi\jsonBehavior\JsonBehavior;
-use paulzi\jsonBehavior\JsonValidator;
+use hipanel\behaviors\JsonBehavior;
+use hipanel\behaviors\JsonValidator;
 use Yii;
 
 /**
