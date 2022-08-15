@@ -1,4 +1,4 @@
-import { test } from "@hipanel-core/tests/fixtures";
+import { test } from "@hipanel-core/fixtures";
 import { expect } from "@playwright/test";
 
 test("Test the Document page is work @hipanel-module-document @manager @document", async ({ managerPage }) => {
