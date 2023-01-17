@@ -104,8 +104,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?= $prepareForm
                                 ->field($prepareMailOutForm, 'message')
                                 ->textarea(['v-model.trim' => 'mailOut.message', 'rows' => 15])
-                                ->hint(Html::a('Twig templating language',
-                                    'https://twig.symfony.com/',
+                                ->hint(Html::a('TWIG CHEAT SHEET',
+                                    'https://github.com/okeeffed/cheat-sheets/blob/master/twig-cheat-sheet.md',
                                     ['target' => '_blank'])) ?>
                             <p class="help-block" style="columns: 2">
                                 <?php foreach (['client' => 'Client\'s login',
@@ -117,10 +117,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'balances' => 'Balances',
                                                 'debts' => 'Debts',
                                                 'prevovers' => 'Previous month overuses',
-                                                'min_balance' => 'The smallest of all client balances',
+                                                'min_balance_with_currency' => 'The smallest of all client balances with currency',
+                                                'min_balance' => 'The smallest of all client balances without currency',
                                                ] as $key => $label) : ?>
-                                    <code v-html="'{{ <?= $key ?> }}'"></code> or <code
-                                            v-html="'{<?= $key ?>}'"></code> - <?= $label ?><br>
+                                    <code v-html="'{{ <?= $key ?> }}'"></code> - <?= $label ?><br>
                                 <?php endforeach ?>
                             </p>
                         </div>

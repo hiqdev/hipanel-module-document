@@ -48,7 +48,7 @@ class PrepareMailOutForm extends Model implements MailOutFormInterface
             'direct_only' => Yii::t('hipanel.document.mailout', 'Direct clients only'),
             'recipients' => Yii::t('hipanel.document.mailout', 'Recipients'),
             'type' => Yii::t('hipanel.document.mailout', 'Type of attachments'),
-            'html' => Yii::t('hipanel.document.mailout', 'Use HTML message'),
+            'html' => Yii::t('hipanel.document.mailout', 'Render as HTML'),
         ];
     }
 
