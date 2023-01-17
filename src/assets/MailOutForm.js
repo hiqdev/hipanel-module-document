@@ -15,6 +15,7 @@ Vue.createApp({
         message: "",
         attach: "0",
         direct_only: "0",
+        html: "0",
       },
       previews: {},
       collapsed: false,
@@ -25,6 +26,15 @@ Vue.createApp({
     recipients() {
       return this.mailOut.recipients.split(/\r?\n/).filter(line => line !== null && line !== "");
     },
+    downloadUrl() {
+      return recipient => {
+        const payload = Object.assign({}, this.mailOut);
+        payload.recipients = recipient;
+        const queryString = new URLSearchParams(payload);
+
+        return ['/document/mail-out/download-eml', queryString.toString()].join("?");
+      }
+    }
   },
   methods: {
     prepareMailOut(event) {
@@ -51,6 +61,13 @@ Vue.createApp({
       }
 
       return false;
+    },
+    showPreview(preview) {
+      if (preview.length > 5000) {
+        return preview.substring(0, preview.search(/[\r\n]{3}/));
+      }
+
+      return preview;
     },
     showPreviewFor(event, recipient) {
       const btn = $(event.target).button("loading");
@@ -82,6 +99,7 @@ Vue.createApp({
       this.mailOut.type = "invoice";
       this.mailOut.attach = "0";
       this.mailOut.direct_only = "0";
+      this.mailOut.html = "0";
       this.mailOut.from = "";
       this.mailOut.subject = "";
       this.mailOut.message = "";
