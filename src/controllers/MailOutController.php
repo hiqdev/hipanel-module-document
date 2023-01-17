@@ -49,9 +49,37 @@ class MailOutController extends Controller
         return $this->handleForm(new SendMailOutForm(['test' => false]));
     }
 
+    public function actionDownloadEml()
+    {
+        $form = new SendMailOutForm(['test' => true]);
+        if (($form->load($this->request->get()) || $form->load($this->request->get(), ''))) {
+            if (!$form->validate()) {
+                $first = $form->getFirstErrors();
+
+                return $this->renderContent(reset($first));
+            }
+            try {
+                $form->perform();
+            } catch (Exception $e) {
+                return $this->renderContent($e->getMessage());
+            }
+            [$recipient,] = explode(':', $form->recipients);
+            $data = $form->toArray();
+            $content = $data[$recipient]['preview'] ?? '';
+            if (!empty($content)) {
+                return $this->response->sendContentAsFile(
+                    $content,
+                    implode('.', [$recipient, 'eml']),
+                    ['inline' => true, 'mimeType' => 'application/octet-stream']
+                );
+            }
+        }
+    }
+
     private function handleForm(MailOutFormInterface $form): Response
     {
-        if ($this->request->isAjax && ($form->load($this->request->post()) || $form->load($this->request->post(), ''))) {
+        if ($this->request->isAjax && ($form->load($this->request->post()) || $form->load($this->request->post(),
+                    ''))) {
             if (!$form->validate()) {
                 $first = $form->getFirstErrors();
 

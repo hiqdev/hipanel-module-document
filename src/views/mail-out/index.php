@@ -27,12 +27,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title"><?= Yii::t('hipanel.document.mailout', 'Emails preview') ?> <span>{{ Object.keys(recipients).length }}</span></h4>
+                    <h4 class="modal-title"><?= Yii::t('hipanel.document.mailout', 'Emails preview') ?> <span>{{ Object.keys(recipients).length }}</span>
+                    </h4>
                 </div>
                 <div class="modal-body no-padding emails-box">
                     <div class="email-box" v-for="recipient in recipients">
                         <p v-if="recipient.split(':')[0] in previews">
-                            {{ previews[recipient.split(':')[0]].preview }}
+                            <a class="btn btn-block btn-default"
+                               style="margin: 0 0 1em;"
+                               target="_blank"
+                               :href="downloadUrl(recipient)"
+                            >Download EML file</a>{{ showPreview(previews[recipient.split(':')[0]].preview) }}
                         </p>
                         <div v-else>
                             <h6>{{ recipient }}</h6>
@@ -79,18 +84,30 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <div class="row">
                         <div class="col-md-4">
-                            <?= $prepareForm->field($prepareMailOutForm, 'from')->input('email', ['v-model.trim' => 'mailOut.from']) ?>
-                            <?= $prepareForm->field($prepareMailOutForm, 'subject')->textInput(['v-model.trim' => 'mailOut.subject']) ?>
+                            <?= $prepareForm->field($prepareMailOutForm, 'from')->input('email',
+                                ['v-model.trim' => 'mailOut.from']) ?>
+                            <?= $prepareForm->field($prepareMailOutForm,
+                                'subject')->textInput(['v-model.trim' => 'mailOut.subject']) ?>
                             <?= $prepareForm->field($prepareMailOutForm, 'balance')
-                                ->dropDownList($prepareMailOutForm->getBalanceOptions(), ['v-model' => 'mailOut.balance']) ?>
+                                ->dropDownList($prepareMailOutForm->getBalanceOptions(),
+                                    ['v-model' => 'mailOut.balance']) ?>
                             <?= $prepareForm->field($prepareMailOutForm, 'type')
                                 ->dropDownList($prepareMailOutForm->getTypeOptions(), ['v-model' => 'mailOut.type']) ?>
-                            <?= $prepareForm->field($prepareMailOutForm, 'attach')->checkbox(['v-model' => 'mailOut.attach', 'true-value' => '1', 'false-value' => '0']) ?>
-                            <?= $prepareForm->field($prepareMailOutForm, 'direct_only')->checkbox(['v-model' => 'mailOut.direct_only', 'true-value' => '1', 'false-value' => '0']) ?>
+                            <?= $prepareForm->field($prepareMailOutForm,
+                                'attach')->checkbox(['v-model' => 'mailOut.attach', 'true-value' => '1', 'false-value' => '0']) ?>
+                            <?= $prepareForm->field($prepareMailOutForm,
+                                'direct_only')->checkbox(['v-model' => 'mailOut.direct_only', 'true-value' => '1', 'false-value' => '0']) ?>
+                            <?= $prepareForm->field($prepareMailOutForm,
+                                'html')->checkbox(['v-model' => 'mailOut.html', 'true-value' => '1', 'false-value' => '0']) ?>
                         </div>
                         <div class="col-md-8">
-                            <?= $prepareForm->field($prepareMailOutForm, 'message')->textarea(['v-model.trim' => 'mailOut.message', 'rows' => 15]) ?>
-                            <p class="help-block" style="columns: 3">
+                            <?= $prepareForm
+                                ->field($prepareMailOutForm, 'message')
+                                ->textarea(['v-model.trim' => 'mailOut.message', 'rows' => 15])
+                                ->hint(Html::a('Twig templating language',
+                                    'https://twig.symfony.com/',
+                                    ['target' => '_blank'])) ?>
+                            <p class="help-block" style="columns: 2">
                                 <?php foreach (['client' => 'Client\'s login',
                                                 'client_name' => 'Client\'s name (from contacts)',
                                                 'client_label' => 'Client\'s label (from memo)',
@@ -100,8 +117,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'balances' => 'Balances',
                                                 'debts' => 'Debts',
                                                 'prevovers' => 'Previous month overuses',
+                                                'min_balance' => 'The smallest of all client balances',
                                                ] as $key => $label) : ?>
-                                    <strong>{<?= $key ?>}</strong> - <?= $label ?><br>
+                                    <code v-html="'{{ <?= $key ?> }}'"></code> or <code
+                                            v-html="'{<?= $key ?>}'"></code> - <?= $label ?><br>
                                 <?php endforeach ?>
                             </p>
                         </div>
@@ -139,14 +158,20 @@ $this->params['breadcrumbs'][] = $this->title;
                     'enableAjaxValidation' => false,
                     'options' => [
                         'ref' => 'sendForm',
-                        'data-confirm-message' => Yii::t('hipanel.document.mailout', 'Are you sure you want to send emails?'),
+                        'data-confirm-message' => Yii::t('hipanel.document.mailout',
+                            'Are you sure you want to send emails?'),
                         'data-success-message' => Yii::t('hipanel.document.mailout', 'Mail-out sent successfully'),
                     ],
                 ]) ?>
                 <div class="box-body">
-                    <?= $sendForm->field($sendMailOutForm, 'recipients')->textarea(['v-model.trim' => 'mailOut.recipients', 'rows' => 15]) ?>
-                    <?= Html::activeHiddenInput($sendMailOutForm, 'attach', ['v-model' => 'mailOut.attach', 'true-value' => '1', 'false-value' => '0']) ?>
-                    <?= Html::activeHiddenInput($sendMailOutForm, 'direct_only', ['v-model' => 'mailOut.direct_only', 'true-value' => '1', 'false-value' => '0']) ?>
+                    <?= $sendForm->field($sendMailOutForm,
+                        'recipients')->textarea(['v-model.trim' => 'mailOut.recipients', 'rows' => 15]) ?>
+                    <?= Html::activeHiddenInput($sendMailOutForm,
+                        'attach',
+                        ['v-model' => 'mailOut.attach', 'true-value' => '1', 'false-value' => '0']) ?>
+                    <?= Html::activeHiddenInput($sendMailOutForm,
+                        'direct_only',
+                        ['v-model' => 'mailOut.direct_only', 'true-value' => '1', 'false-value' => '0']) ?>
                     <?= Html::activeHiddenInput($sendMailOutForm, 'from', ['v-model' => 'mailOut.from']) ?>
                     <?= Html::activeHiddenInput($sendMailOutForm, 'subject', ['v-model' => 'mailOut.subject']) ?>
                     <?= Html::activeHiddenInput($sendMailOutForm, 'message', ['v-model' => 'mailOut.message']) ?>
