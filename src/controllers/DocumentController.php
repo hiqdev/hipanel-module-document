@@ -19,6 +19,7 @@ use hipanel\actions\ViewAction;
 use hipanel\base\CrudController;
 use hipanel\filters\EasyAccessControl;
 use hipanel\modules\document\models\Document;
+use hipanel\modules\finance\actions\GenerateDocumentAction;
 use hiqdev\hiart\ResponseErrorException;
 use Yii;
 
@@ -51,6 +52,9 @@ class DocumentController extends CrudController
                     return $this->getAdditionalData();
                 },
                 'on beforePerform' => $this->getBeforePerformClosure(),
+            ],
+            'generate-document' => [
+                'class' => GenerateDocumentAction::class
             ],
             'create' => [
                 'class' => SmartCreateAction::class,
