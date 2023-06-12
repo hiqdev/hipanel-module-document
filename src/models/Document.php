@@ -100,6 +100,7 @@ class Document extends \hipanel\base\Model
             ],
             [['id'], 'required', 'on' => ['update', 'delete']],
             [['data'], JsonValidator::class],
+            [['templateid', 'template_name'], 'string'],
         ];
     }
 
