@@ -9,7 +9,7 @@ use hipanel\models\Ref;
 class FinancialDocumentTypeCombo extends StaticCombo
 {
     final const INVOICE_TYPE = 'invoice';
-    final const PAYMENT_REQUEST_TYPE = 'proforma';
+    final const PAYMENT_REQUEST_TYPE = 'payment_request';
 
     public $hasId = true;
 

@@ -24,7 +24,7 @@ class PrepareMailOutForm extends Model implements MailOutFormInterface
     public const POSITIVE_BALANCE = 'positive';
     public const NEGATIVE_BALANCE = 'negative';
     public const INVOICE_TYPE = 'invoice';
-    public const PROFORMA_TYPE = 'proforma';
+    public const PROFORMA_TYPE = 'payment_request';
 
     public function rules()
     {
