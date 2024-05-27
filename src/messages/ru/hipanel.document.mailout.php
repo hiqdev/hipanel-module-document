@@ -2,7 +2,7 @@
 
 return [
     'Invoice' => 'Инвойс',
-    'Proforma' => 'Проформа',
+    'Payment request' => 'Запрос на оплату',
     'Mail-out' => 'Рассылка документов',
     'Mail-out sent successfully' => 'Рассылка успешно отправлена',
     'Prepare mail-out' => 'Подготовка рассылки',
