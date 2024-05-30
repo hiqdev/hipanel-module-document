@@ -24,7 +24,7 @@ class PrepareMailOutForm extends Model implements MailOutFormInterface
     public const POSITIVE_BALANCE = 'positive';
     public const NEGATIVE_BALANCE = 'negative';
     public const INVOICE_TYPE = 'invoice';
-    public const PROFORMA_TYPE = 'proforma';
+    public const PAYMENT_REQUEST_TYPE = 'payment_request';
 
     public function rules()
     {
@@ -65,7 +65,7 @@ class PrepareMailOutForm extends Model implements MailOutFormInterface
     {
         return [
             self::INVOICE_TYPE => Yii::t('hipanel.document.mailout', 'Invoice'),
-            self::PROFORMA_TYPE => Yii::t('hipanel.document.mailout', 'Proforma'),
+            self::PAYMENT_REQUEST_TYPE => Yii::t('hipanel.document.mailout', 'Payment request'),
         ];
     }
 
