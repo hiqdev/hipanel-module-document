@@ -15,7 +15,7 @@ use hipanel\modules\document\models\Document;
 use hipanel\modules\document\widgets\combo\ContactIndependentCombo;
 use hipanel\widgets\Box;
 use hipanel\widgets\combo\ObjectCombo;
-use hipanel\widgets\DateTimePicker;
+use hipanel\widgets\DatePicker;
 use hipanel\widgets\FileInput;
 use hipanel\widgets\FileRender;
 use hiqdev\combo\StaticCombo;
@@ -113,27 +113,16 @@ use yii\widgets\ActiveForm;
 
                 <?= $form->field($model, 'validity_start', [
                     'enableClientValidation' => false,
-                ])->widget(DateTimePicker::class, [
-                    'clientOptions' => [
-                        'format' => 'yyyy-mm-dd',
-                        'minView' => 2,
-                        'todayHighlight' => true,
-                    ],
-                ]) ?>
+                ])->widget(DatePicker::class) ?>
             </div>
             <div class="col-md-6">
                 <?= $form->field($model, 'validity_end', [
                     'enableClientValidation' => false,
-                ])->widget(DateTimePicker::class, [
+                ])->widget(DatePicker::class, [
                     'options' => [
                         'value' => !empty($model->validity_end)
                             ? Yii::$app->formatter->asDate($model->validity_end, 'php:Y-m-d')
                             : null,
-                    ],
-                    'clientOptions' => [
-                        'minView' => 2,
-                        'format' => 'yyyy-mm-dd',
-                        'todayHighlight' => true,
                     ],
                 ]) ?>
             </div>
