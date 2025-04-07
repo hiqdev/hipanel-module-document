@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @var hipanel\modules\document\models\Document
+ * @var hipanel\modules\document\models\Document $model
  * @var array $types
  * @var array $statuses
  */

@@ -129,14 +129,7 @@ use yii\widgets\ActiveForm;
         </div>
     <?php endif ?>
     <?php if ($model->isNewRecord): ?>
-        <?= $form->field($model, 'attachment')->widget(FileInput::class, [
-            'pluginOptions' => [
-                'previewFileType' => 'any',
-                'showRemove' => true,
-                'showUpload' => false,
-                'initialPreviewShowDelete' => true,
-            ],
-        ]) ?>
+        <?= $form->field($model, 'attachment')->widget(FileInput::class) ?>
     <?php endif ?>
 
     <?= Html::submitButton(Yii::t('hipanel', 'Save'), ['class' => 'btn btn-success']); ?>
