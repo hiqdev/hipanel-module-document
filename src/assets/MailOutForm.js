@@ -15,6 +15,8 @@ Vue.createApp({
         message: "",
         attach: "0",
         direct_only: "0",
+        seller_id: "",
+        seller: "",
         html: "0",
       },
       previews: {},
@@ -99,6 +101,8 @@ Vue.createApp({
       this.mailOut.type = "invoice";
       this.mailOut.attach = "0";
       this.mailOut.direct_only = "0";
+      this.mailOut.seller_id = "";
+      this.mailOut.seller = "";
       this.mailOut.html = "0";
       this.mailOut.from = "";
       this.mailOut.subject = "";

@@ -18,7 +18,10 @@ class PrepareMailOutForm extends Model implements MailOutFormInterface
     public ?string $recipients = null;
     public ?string $attach = null;
     public bool $html = false;
-    public ?string $direct_only = null;
+    public bool $direct_only = false;
+    public ?string $seller = null;
+    public ?string $seller_id = null;
+
 
     public const ANY_BALANCE = 'any';
     public const POSITIVE_BALANCE = 'positive';
@@ -34,6 +37,7 @@ class PrepareMailOutForm extends Model implements MailOutFormInterface
             [['attach', 'direct_only', 'html'], 'boolean', 'trueValue' => '1', 'falseValue' => '0'],
             ['from', 'email'],
             [['subject', 'message', 'type', 'recipients'], 'string'],
+            [['seller_id'], 'integer'],
         ];
     }
 
@@ -49,6 +53,7 @@ class PrepareMailOutForm extends Model implements MailOutFormInterface
             'recipients' => Yii::t('hipanel.document.mailout', 'Recipients'),
             'type' => Yii::t('hipanel.document.mailout', 'Type of attachments'),
             'html' => Yii::t('hipanel.document.mailout', 'Render as HTML'),
+            'seller_id' => Yii::t('hipanel.document.mailout', 'Seller'),
         ];
     }
 
