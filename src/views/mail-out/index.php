@@ -3,6 +3,7 @@
 use hipanel\modules\document\assets\MailOutFormAsset;
 use hipanel\modules\document\forms\PrepareMailOutForm;
 use hipanel\modules\document\forms\SendMailOutForm;
+use hipanel\modules\client\widgets\combo\SellerCombo;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -93,6 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     ['v-model' => 'mailOut.balance']) ?>
                             <?= $prepareForm->field($prepareMailOutForm, 'type')
                                 ->dropDownList($prepareMailOutForm->getTypeOptions(), ['v-model' => 'mailOut.type']) ?>
+                            <?= $prepareForm->field($prepareMailOutForm, 'seller')->textInput(['v-model' => 'mailOut.seller']) ?>
                             <?= $prepareForm->field($prepareMailOutForm,
                                 'attach')->checkbox(['v-model' => 'mailOut.attach', 'true-value' => '1', 'false-value' => '0']) ?>
                             <?= $prepareForm->field($prepareMailOutForm,
@@ -172,6 +174,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::activeHiddenInput($sendMailOutForm,
                         'direct_only',
                         ['v-model' => 'mailOut.direct_only', 'true-value' => '1', 'false-value' => '0']) ?>
+                    <?= Html::activeHiddenInput($sendMailOutForm, 'seller_id', ['v-model' => 'mailOut.seller_id']) ?>
                     <?= Html::activeHiddenInput($sendMailOutForm, 'from', ['v-model' => 'mailOut.from']) ?>
                     <?= Html::activeHiddenInput($sendMailOutForm, 'subject', ['v-model' => 'mailOut.subject']) ?>
                     <?= Html::activeHiddenInput($sendMailOutForm, 'message', ['v-model' => 'mailOut.message']) ?>
