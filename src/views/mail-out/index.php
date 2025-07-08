@@ -174,7 +174,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::activeHiddenInput($sendMailOutForm,
                         'direct_only',
                         ['v-model' => 'mailOut.direct_only', 'true-value' => '1', 'false-value' => '0']) ?>
-                    <?= Html::activeHiddenInput($sendMailOutForm, 'seller_id', ['v-model' => 'mailOut.seller_id']) ?>
+                    <?= Html::activeHiddenInput($sendMailOutForm, 'seller', ['v-model' => 'mailOut.seller']) ?>
                     <?= Html::activeHiddenInput($sendMailOutForm, 'from', ['v-model' => 'mailOut.from']) ?>
                     <?= Html::activeHiddenInput($sendMailOutForm, 'subject', ['v-model' => 'mailOut.subject']) ?>
                     <?= Html::activeHiddenInput($sendMailOutForm, 'message', ['v-model' => 'mailOut.message']) ?>
