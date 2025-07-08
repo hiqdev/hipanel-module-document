@@ -36,7 +36,7 @@ class PrepareMailOutForm extends Model implements MailOutFormInterface
             ['balance', 'in', 'range' => array_keys($this->getBalanceOptions())],
             [['attach', 'direct_only', 'html'], 'boolean', 'trueValue' => '1', 'falseValue' => '0'],
             ['from', 'email'],
-            [['subject', 'message', 'type', 'recipients'], 'string'],
+            [['subject', 'message', 'type', 'recipients', 'seller'], 'string'],
             [['seller_id'], 'integer'],
         ];
     }
