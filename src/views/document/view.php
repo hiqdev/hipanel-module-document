@@ -123,13 +123,19 @@ foreach ($charges as $charge) {
 ?>
 <div class="row">
     <div class="col-md-12">
-        <?php $box = Box::begin(['renderBody' => false]) ?>
+        <?php $box = Box::begin(['renderBody' => false, 'title' => Yii::t('hipanel:document', 'Charges')]) ?>
         <?php $box->beginHeader() ?>
         <div class="pull-right">
             <?= Yii::t('hipanel:document', 'Total') ?>:
             <?php foreach ($totals as $currency => $total): ?>
                 <strong><?= Yii::$app->formatter->asCurrency($total, $currency) ?></strong>
             <?php endforeach ?>
+            <small class="text-muted" style="margin-left:4px">(<?= Yii::t('hipanel:document', 'excl. VAT') ?>)</small>
+            <?= Html::a(
+                Html::tag('i', '', ['class' => 'fa fa-list']) . ' ' . Yii::t('hipanel:document', 'All charges'),
+                ['@charge/index', 'ChargeSearch[document_ids]' => $model->id],
+                ['class' => 'btn btn-xs btn-default', 'style' => 'margin-left:8px']
+            ) ?>
         </div>
         <?php $box->endHeader() ?>
         <?php $box->beginBody() ?>
@@ -156,6 +162,7 @@ foreach ($charges as $charge) {
             <?php foreach ($totals as $currency => $total): ?>
                 <strong><?= Yii::$app->formatter->asCurrency($total, $currency) ?></strong>
             <?php endforeach ?>
+            <small class="text-muted" style="margin-left:4px">(<?= Yii::t('hipanel:document', 'excl. VAT') ?>)</small>
         </div>
         <?php $box->endFooter() ?>
         <?php Box::end() ?>
