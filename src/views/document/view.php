@@ -143,12 +143,32 @@ foreach ($charges as $charge) {
             'dataProvider' => new ArrayDataProvider(['allModels' => $charges, 'pagination' => false]),
             'boxed' => false,
             'layout' => '{items}',
+            'rowOptions' => function ($charge) {
+                return $charge->document_sum !== null && (string)$charge->sum !== (string)$charge->document_sum
+                    ? ['class' => 'warning', 'title' => Yii::t('hipanel:document', 'Sum changed since document was generated')]
+                    : [];
+            },
             'columns' => [
                 'id',
                 'bill_id',
                 'type_label',
                 'name',
                 'sum',
+                [
+                    'label' => Yii::t('hipanel:document', 'Billed sum'),
+                    'format' => 'raw',
+                    'headerOptions' => ['class' => 'text-right'],
+                    'contentOptions' => function ($charge) {
+                        $changed = $charge->document_sum !== null && (string)$charge->sum !== (string)$charge->document_sum;
+                        return ['class' => 'text-right' . ($changed ? ' text-danger' : ' text-muted')];
+                    },
+                    'value' => function ($charge) {
+                        if ($charge->document_sum === null) {
+                            return '<span class="text-muted">—</span>';
+                        }
+                        return Yii::$app->formatter->asCurrency($charge->document_sum, $charge->currency);
+                    },
+                ],
                 'quantity',
                 'is_payed',
                 'time',
